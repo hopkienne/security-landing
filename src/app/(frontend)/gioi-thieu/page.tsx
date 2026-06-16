@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { ShieldCheck, Target, Users, Globe } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -34,18 +35,29 @@ export default function AboutPage() {
             title={`${BRAND.name} — đối tác an ninh mạng của doanh nghiệp`}
             subtitle={BRAND.positioning}
           />
-          <div className="mt-10 max-w-3xl space-y-4 text-base leading-relaxed text-slate">
-            <p>
-              {BRAND.name} là đơn vị tư vấn và triển khai giải pháp an ninh mạng, đồng hành cùng
-              doanh nghiệp trong việc xây dựng năng lực phòng thủ chủ động. Chúng tôi kết hợp công
-              nghệ hiện đại, quy trình chuẩn quốc tế và đội ngũ chuyên gia giàu kinh nghiệm để bảo
-              vệ hệ thống, dữ liệu và hoạt động kinh doanh của khách hàng.
-            </p>
-            <p>
-              Từ đánh giá rủi ro, triển khai giải pháp đến giám sát và phản ứng sự cố 24/7, chúng
-              tôi cung cấp dịch vụ toàn diện, minh bạch và đo lường được — giúp doanh nghiệp an tâm
-              tập trung vào tăng trưởng.
-            </p>
+          <div className="mt-10 grid items-center gap-10 lg:grid-cols-2">
+            <div className="max-w-3xl space-y-4 text-base leading-relaxed text-slate">
+              <p>
+                {BRAND.name} là đơn vị tư vấn và triển khai giải pháp an ninh mạng, đồng hành cùng
+                doanh nghiệp trong việc xây dựng năng lực phòng thủ chủ động. Chúng tôi kết hợp công
+                nghệ hiện đại, quy trình chuẩn quốc tế và đội ngũ chuyên gia giàu kinh nghiệm để bảo
+                vệ hệ thống, dữ liệu và hoạt động kinh doanh của khách hàng.
+              </p>
+              <p>
+                Từ đánh giá rủi ro, triển khai giải pháp đến giám sát và phản ứng sự cố 24/7, chúng
+                tôi cung cấp dịch vụ toàn diện, minh bạch và đo lường được — giúp doanh nghiệp an tâm
+                tập trung vào tăng trưởng.
+              </p>
+            </div>
+            <div className="relative aspect-[8/5] overflow-hidden rounded-[var(--radius-brand-xl)] border border-border-soft">
+              <Image
+                src="/secureops/about-security-consulting.webp"
+                alt="Tư vấn và thiết kế kiến trúc bảo mật cho doanh nghiệp"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
           </div>
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

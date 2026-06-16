@@ -3,11 +3,12 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { AnimatePresence, motion } from 'motion/react'
-import { ChevronDown, ShieldCheck, X } from 'lucide-react'
+import { ChevronDown, X } from 'lucide-react'
 import type { MegaMenuData, NavGroup } from './nav-data'
 import { vi } from '@/dictionaries/vi'
 import { CTA, BRAND } from '@/brand/tokens'
 import { cn } from '@/lib/utils'
+import { ShieldMark } from './Logo'
 
 const PLAIN_LINKS = [
   { label: vi.nav.about, href: vi.routes.about },
@@ -47,10 +48,8 @@ export function MobileNav({
             aria-label="Menu di động"
           >
             <div className="flex items-center justify-between border-b border-border-soft px-4 py-4">
-              <span className="flex items-center gap-2 font-bold text-ink">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-[var(--radius-brand)] bg-primary text-white">
-                  <ShieldCheck className="h-4 w-4" />
-                </span>
+              <span className="flex items-center gap-2 text-lg font-extrabold text-ink">
+                <ShieldMark className="h-8 w-8" />
                 {BRAND.logoText}
               </span>
               <button
@@ -88,7 +87,7 @@ export function MobileNav({
               <Link
                 href={vi.routes.contact}
                 onClick={onClose}
-                className="block rounded-[var(--radius-brand)] bg-primary px-5 py-3 text-center text-sm font-semibold text-white"
+                className="block rounded-full bg-primary px-5 py-3 text-center text-sm font-bold text-white"
               >
                 {CTA.primary}
               </Link>

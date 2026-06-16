@@ -45,7 +45,7 @@ export default async function PostDetailPage({
   if (!post) notFound()
 
   const url = `${SITE_URL}/tin-tuc/${slug}`
-  const cover = mediaUrl(post.coverImage, 'og')
+  const cover = mediaUrl(post.coverImage, 'og') ?? '/secureops/blog-cover-default.webp'
   const category = typeof post.category === 'object' && post.category ? post.category.name : null
 
   return (

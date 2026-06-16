@@ -66,7 +66,7 @@ export default async function CaseStudyDetailPage({
       <section className="border-b border-border-soft bg-bg-soft py-14">
         <Container>
           {item.industry && (
-            <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+            <span className="text-sm font-semibold uppercase tracking-wide text-primary">
               {item.industry}
             </span>
           )}

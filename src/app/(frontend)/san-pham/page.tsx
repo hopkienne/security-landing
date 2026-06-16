@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Reveal } from '@/components/ui/Reveal'
@@ -29,6 +30,16 @@ export default async function ProductsPage() {
             title={vi.sections.productsTitle}
             subtitle={vi.sections.productsSubtitle}
           />
+          <div className="relative mt-8 aspect-[12/5] overflow-hidden rounded-[var(--radius-brand-xl)] border border-border-soft">
+            <Image
+              src="/secureops/products-security-platform.webp"
+              alt="Các module sản phẩm kết nối tới một hub bảo mật trung tâm"
+              fill
+              priority
+              sizes="(max-width: 1280px) 100vw, 1216px"
+              className="object-cover"
+            />
+          </div>
           {categories.length > 0 ? (
             categories.map((cat) => {
               const items = products.filter(

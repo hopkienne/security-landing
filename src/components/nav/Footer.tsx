@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { ShieldCheck, Mail, Phone, MapPin } from 'lucide-react'
+import { Facebook, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react'
 import { BRAND } from '@/brand/tokens'
 import { vi } from '@/dictionaries/vi'
 import { Container } from '@/components/ui/Container'
+import { Logo } from './Logo'
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -37,39 +38,62 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   },
 ]
 
+const SOCIAL = [
+  { icon: Linkedin, href: BRAND.social.linkedin, label: 'LinkedIn' },
+  { icon: Facebook, href: BRAND.social.facebook, label: 'Facebook' },
+  { icon: Youtube, href: BRAND.social.youtube, label: 'YouTube' },
+]
+
 export function Footer() {
   const year = 2026
   return (
-    <footer className="mt-24 border-t border-border-soft bg-bg-soft">
-      <Container className="py-14">
+    <footer className="relative mt-24 overflow-hidden bg-navy text-white">
+      <div className="bg-dotgrid absolute inset-0 opacity-30" aria-hidden />
+      <Container className="relative py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-6">
           <div className="col-span-2">
-            <Link href="/" className="flex items-center gap-2 font-bold text-ink">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-brand)] bg-primary text-white">
-                <ShieldCheck className="h-5 w-5" />
-              </span>
-              <span className="text-xl">{BRAND.logoText}</span>
-            </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate">{BRAND.positioning}</p>
-            <ul className="mt-5 space-y-2 text-sm text-slate">
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary" /> {BRAND.phone}
+            <Logo tone="dark" />
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
+              {BRAND.positioning}
+            </p>
+            <ul className="mt-6 space-y-2.5 text-sm text-white/70">
+              <li className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 text-primary-light" /> {BRAND.phone}
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-primary" /> {BRAND.email}
+              <li className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 text-primary-light" /> {BRAND.email}
               </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> {BRAND.address}
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary-light" /> {BRAND.address}
               </li>
             </ul>
+            <div className="mt-6 flex gap-2.5">
+              {SOCIAL.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-primary hover:bg-primary hover:text-white"
+                >
+                  <s.icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
           </div>
           {COLUMNS.map((col) => (
             <div key={col.title}>
-              <h4 className="mb-3 text-sm font-semibold text-ink">{col.title}</h4>
-              <ul className="space-y-2">
+              <h4 className="mb-3.5 text-xs font-bold uppercase tracking-[0.14em] text-white/50">
+                {col.title}
+              </h4>
+              <ul className="space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-slate hover:text-primary">
+                    <Link
+                      href={link.href}
+                      className="text-sm text-white/75 transition-colors hover:text-white"
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -78,7 +102,7 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border-soft pt-6 text-sm text-slate sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-7 text-sm text-white/55 sm:flex-row">
           <p>
             © {year} {BRAND.legalName}. Bảo lưu mọi quyền.
           </p>

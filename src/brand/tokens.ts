@@ -28,27 +28,33 @@ export const BRAND = {
 } as const
 
 /**
- * Accent palette — cyber teal / cyan / electric blue. Deliberately NOT Sophos red.
- * These are mirrored as CSS custom properties in globals.css.
+ * Palette — Sophos-inspired: electric blue as the action colour, with cyan and
+ * turquoise as gradient accents (no orange), and a deep navy for dark sections.
+ * Values mirror the real Sophos design tokens and are exposed as CSS custom
+ * properties in globals.css (consumed by Tailwind v4 via @theme).
  */
 export const COLORS = {
-  primary: '#0ea5b7', // teal-cyan
-  primaryDark: '#0b7c8a',
-  primaryLight: '#3fd0df',
-  accent: '#2563eb', // electric blue
-  accentLight: '#60a5fa',
-  ink: '#0b1220', // near-black headings
-  slate: '#475569',
+  primary: '#2006f7', // electric blue (action colour)
+  primaryDark: '#1a05c6', // hover
+  primaryLight: '#3080ff',
+  cyan: '#00edff', // gradient accent
+  turquoise: '#00f2b3', // gradient accent
+  sky: '#009cfb',
+  navy: '#0a143a', // deep navy for dark sections
+  navyDeep: '#08012d', // darkest navy (gradient base)
+  oxford: '#001a47', // oxford blue
+  ink: '#0a143a', // near-navy headings
+  slate: '#62748e',
   bg: '#ffffff',
-  bgSoft: '#f6f9fb',
-  border: '#e3eaf0',
+  bgSoft: '#f3f4f6',
+  border: '#e2e8f0',
 } as const
 
 export const RADIUS = {
-  sm: '0.375rem',
-  md: '0.625rem',
-  lg: '1rem',
-  xl: '1.5rem',
+  sm: '0.625rem', // 10px
+  md: '1.25rem', // 20px
+  lg: '1.875rem', // 30px (pill buttons)
+  xl: '2.5rem',
 } as const
 
 /** Site-wide CTA labels. Primary CTA is "Liên hệ tư vấn" across the whole site. */

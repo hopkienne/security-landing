@@ -25,13 +25,19 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-primary">
+        <p
+          className={cn(
+            'mb-2.5 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.16em] text-primary',
+            align === 'center' && 'justify-center',
+          )}
+        >
+          <span className="h-0.5 w-6 rounded-full bg-gradient-to-r from-cyan to-primary" aria-hidden />
           {eyebrow}
         </p>
       )}
       <Tag
         className={cn(
-          'font-bold tracking-tight text-ink',
+          'font-extrabold tracking-tight text-ink',
           Tag === 'h1' ? 'text-4xl sm:text-5xl' : 'text-3xl sm:text-4xl',
         )}
       >

@@ -27,7 +27,7 @@ export function buildMetadata({
   const fullTitle = title ? `${title} · ${BRAND.name}` : `${BRAND.name} — ${BRAND.tagline}`
   const desc = description || BRAND.positioning
   const url = canonical || `${SITE_URL}${path}`
-  const ogImage = image || `${SITE_URL}/og-default.png`
+  const ogImage = image || `${SITE_URL}/secureops/og-default.png`
 
   return {
     title: fullTitle,

@@ -1,28 +1,40 @@
 @import 'tailwindcss';
 
 /*
- * SecureOps theme. Brand tokens are mirrored here as CSS variables and exposed to
- * Tailwind v4 via @theme so utility classes (bg-primary, text-ink, rounded-brand…)
- * stay in sync with src/brand/tokens.ts. Re-skin the site by editing these values.
+ * SecureOps theme — Sophos-inspired enterprise cybersecurity design language.
+ * Palette and tokens mirror the real Sophos design system: electric blue as the
+ * action colour, cyan/turquoise gradient accents (no orange), deep navy darks,
+ * Inter typeface. Brand tokens are exposed to Tailwind v4 via @theme so utility
+ * classes (bg-primary, text-ink, rounded-brand…) stay in sync with
+ * src/brand/tokens.ts. Re-skin the site by editing these values.
  */
 @theme {
-  --color-primary: #0ea5b7;
-  --color-primary-dark: #0b7c8a;
-  --color-primary-light: #3fd0df;
-  --color-accent: #2563eb;
-  --color-accent-light: #60a5fa;
-  --color-ink: #0b1220;
-  --color-slate: #475569;
+  --color-primary: #2006f7;
+  --color-primary-dark: #1a05c6;
+  --color-primary-light: #3080ff;
+  --color-cyan: #00edff;
+  --color-turquoise: #00f2b3;
+  --color-sky: #009cfb;
+  --color-navy: #0a143a;
+  --color-navy-deep: #08012d;
+  --color-oxford: #001a47;
+  --color-ink: #0a143a;
+  --color-slate: #62748e;
   --color-bg: #ffffff;
-  --color-bg-soft: #f6f9fb;
-  --color-border-soft: #e3eaf0;
+  --color-bg-soft: #f3f4f6;
+  --color-border-soft: #e2e8f0;
 
-  --radius-brand: 0.625rem;
-  --radius-brand-lg: 1rem;
-  --radius-brand-xl: 1.5rem;
+  /* Pill buttons (30px) like Sophos; cards use 10–20px. */
+  --radius-brand: 1.25rem;
+  --radius-brand-lg: 1.25rem;
+  --radius-brand-xl: 2.5rem;
 
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
+  --font-sans: var(--font-inter), 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --shadow-glow: 0 24px 60px -18px rgba(32, 6, 247, 0.35);
+
+  --animate-marquee: marquee 38s linear infinite;
 }
 
 :root {
@@ -37,13 +49,22 @@ body {
   background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  /* Sophos enables the ss04 stylistic set on Inter. */
+  font-feature-settings: 'ss04' on;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
+/* Tight, confident display tracking on headings — matches Sophos. */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.03em;
+}
+
 /* Accessible focus ring for keyboard users across the public site. */
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -58,40 +79,127 @@ body {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+
+  /* Dừng video nền trang trí; nền navy + glow phía dưới vẫn hiển thị. */
+  .hero-video {
+    display: none !important;
+  }
 }
 
-/* Utility: subtle grid / telemetry background used in the hero. */
+/* ---------------------------------------------------------------------------
+ * Decorative utilities
+ * ------------------------------------------------------------------------- */
+
+/* Subtle dot grid used on dark hero / sections. */
+.bg-dotgrid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Light line grid for white sections. */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(14, 165, 183, 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(14, 165, 183, 0.07) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(to right, rgba(32, 6, 247, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(32, 6, 247, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
 }
 
-/* Rich-text rendering defaults. */
+/* Deep navy hero backdrop with electric-blue / cyan glow (Sophos-style). */
+.bg-hero-glow {
+  background:
+    radial-gradient(55% 65% at 78% 8%, rgba(32, 6, 247, 0.55) 0%, transparent 60%),
+    radial-gradient(48% 60% at 8% 92%, rgba(0, 237, 255, 0.18) 0%, transparent 55%),
+    linear-gradient(180.01deg, #08012d 16.31%, #0a143a 70%, #08012d 100%);
+}
+
+/* Signature Sophos gradients. */
+.gradient-blue-turq {
+  background: linear-gradient(116.92deg, #2006f7 17.21%, #00f2b3 125.13%);
+}
+.gradient-cyan-blue {
+  background: linear-gradient(270deg, #00edff 0%, #2006f7 100%);
+}
+.gradient-sky-blue {
+  background: linear-gradient(#009cfb 0%, #2006f7 100%);
+}
+
+/* Thin gradient hairline used to separate dark sections. */
+.divider-glow {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(32, 6, 247, 0.7),
+    rgba(0, 237, 255, 0.6),
+    transparent
+  );
+}
+
+/* Logo marquee track. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: var(--animate-marquee);
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.group\/marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Gradient text accent (cyan → electric blue). */
+.text-gradient {
+  background: linear-gradient(100deg, #00edff 0%, #3080ff 45%, #2006f7 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+ * Rich-text rendering defaults.
+ * ------------------------------------------------------------------------- */
 .prose-content :where(h2) {
-  font-size: 1.5rem;
+  font-size: 1.625rem;
   font-weight: 700;
-  margin: 1.5rem 0 0.75rem;
+  letter-spacing: -0.03em;
+  margin: 1.75rem 0 0.75rem;
   color: var(--color-ink);
 }
 .prose-content :where(h3) {
   font-size: 1.25rem;
   font-weight: 600;
   margin: 1.25rem 0 0.5rem;
+  color: var(--color-ink);
 }
 .prose-content :where(p) {
-  margin: 0.75rem 0;
-  line-height: 1.7;
+  margin: 0.85rem 0;
+  line-height: 1.75;
   color: var(--color-slate);
 }
 .prose-content :where(ul) {
   list-style: disc;
   padding-left: 1.25rem;
-  margin: 0.75rem 0;
+  margin: 0.85rem 0;
   color: var(--color-slate);
 }
 .prose-content :where(a) {
-  color: var(--color-accent);
+  color: var(--color-primary);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }

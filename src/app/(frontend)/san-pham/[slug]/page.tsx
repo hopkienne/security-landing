@@ -177,7 +177,7 @@ function FeatureBenefit({ features, benefits }: { features: string[]; benefits: 
           <ul className="space-y-2">
             {benefits.map((b, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-slate">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" /> {b}
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" /> {b}
               </li>
             ))}
           </ul>

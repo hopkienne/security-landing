@@ -1,0 +1,212 @@
+[
+  {
+    "file": "hero-cyber-defense.webp",
+    "width": 2400,
+    "height": 1350,
+    "aspectRatio": "16:9",
+    "background": "navy",
+    "recommendedUse": "Hero trang chủ",
+    "routes": ["/"],
+    "alt": "Nền tảng phòng thủ AI trừu tượng với lõi năng lượng xanh và mạng node cyan."
+  },
+  {
+    "file": "og-default.webp",
+    "width": 1200,
+    "height": 630,
+    "aspectRatio": "40:21",
+    "background": "navy",
+    "recommendedUse": "Ảnh chia sẻ mạng xã hội mặc định",
+    "routes": ["/*"],
+    "alt": "Biểu tượng mạng an toàn trừu tượng phát sáng trên nền navy."
+  },
+  {
+    "file": "about-security-consulting.webp",
+    "width": 1600,
+    "height": 1000,
+    "aspectRatio": "8:5",
+    "background": "light",
+    "recommendedUse": "Ảnh giới thiệu tư vấn và kiến trúc bảo mật",
+    "routes": ["/gioi-thieu"],
+    "alt": "Các khối kiến trúc bảo mật 3D được kết nối trên nền sáng."
+  },
+  {
+    "file": "products-security-platform.webp",
+    "width": 1600,
+    "height": 1000,
+    "aspectRatio": "8:5",
+    "background": "light",
+    "recommendedUse": "Ảnh trang sản phẩm nền tảng bảo mật hợp nhất",
+    "routes": ["/san-pham", "/san-pham/[slug]"],
+    "alt": "Các module sản phẩm 3D kết nối tới một hub bảo mật trung tâm."
+  },
+  {
+    "file": "solutions-network-defense.webp",
+    "width": 1600,
+    "height": 1000,
+    "aspectRatio": "8:5",
+    "background": "navy",
+    "recommendedUse": "Ảnh trang giải pháp phòng thủ mạng nhiều lớp",
+    "routes": ["/giai-phap", "/giai-phap/[slug]"],
+    "alt": "Các lớp phòng thủ đồng tâm bao quanh mạng lõi với luồng dữ liệu cyan."
+  },
+  {
+    "file": "case-study-cover.webp",
+    "width": 1600,
+    "height": 1000,
+    "aspectRatio": "8:5",
+    "background": "navy",
+    "recommendedUse": "Bìa mặc định cho câu chuyện khách hàng",
+    "routes": ["/khach-hang-du-an", "/khach-hang-du-an/[slug]"],
+    "alt": "Mạng doanh nghiệp ổn định với đường tăng trưởng trừu tượng phát sáng."
+  },
+  {
+    "file": "blog-cover-default.webp",
+    "width": 1600,
+    "height": 1000,
+    "aspectRatio": "8:5",
+    "background": "navy",
+    "recommendedUse": "Bìa mặc định cho bài viết và nghiên cứu mối đe dọa",
+    "routes": ["/tin-tuc", "/tin-tuc/[slug]"],
+    "alt": "Radar tình báo mối đe dọa trừu tượng với tín hiệu và hạt dữ liệu cyan."
+  },
+  {
+    "file": "careers-cover.webp",
+    "width": 1600,
+    "height": 1000,
+    "aspectRatio": "8:5",
+    "background": "navy",
+    "recommendedUse": "Bìa tuyển dụng và văn hóa SOC",
+    "routes": ["/tuyen-dung", "/tuyen-dung/[slug]"],
+    "alt": "Đường phát triển nghề nghiệp công nghệ trừu tượng hướng tới tương lai."
+  },
+  {
+    "file": "cta-consulting.webp",
+    "width": 2400,
+    "height": 1000,
+    "aspectRatio": "12:5",
+    "background": "navy",
+    "recommendedUse": "Nền dải kêu gọi tư vấn",
+    "routes": ["/*"],
+    "alt": "Nền navy tinh tế với glow xanh cyan ở hai góc và lưới chấm mờ."
+  },
+  {
+    "file": "abstract-cyber-pattern.webp",
+    "width": 2000,
+    "height": 2000,
+    "aspectRatio": "1:1",
+    "background": "light",
+    "recommendedUse": "Texture nền section hoặc footer",
+    "routes": ["/*"],
+    "alt": "Hoa văn mạng lưới điểm và đường mảnh tông xanh nhạt trên nền sáng."
+  },
+  {
+    "file": "icon-mdr.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon MDR",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng giám sát và phản ứng quản trị dạng orb xanh cyan."
+  },
+  {
+    "file": "icon-edr-xdr.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon EDR/XDR",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng endpoint và vòng cảm biến mở rộng tông xanh cyan."
+  },
+  {
+    "file": "icon-itdr.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon ITDR",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng chòm node định danh xoay quanh lăng kính truy cập."
+  },
+  {
+    "file": "icon-firewall.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon Firewall",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng lớp kiểm soát lưu lượng dạng các phiến kính bo góc."
+  },
+  {
+    "file": "icon-cloud.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon Cloud Security",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng cụm cloud kính với quỹ đạo bảo vệ và node dữ liệu."
+  },
+  {
+    "file": "icon-email.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon Email Security",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng phong bì kính với vòng quét bảo mật cyan."
+  },
+  {
+    "file": "icon-zero-trust.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon Zero Trust",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng vòng xác minh và cổng truy cập phân đoạn quanh lăng kính."
+  },
+  {
+    "file": "icon-ndr.webp",
+    "width": 256,
+    "height": 256,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Icon NDR",
+    "routes": ["/", "/san-pham"],
+    "alt": "Biểu tượng khối mạng node với vòng quét phát hiện phản ứng."
+  },
+  {
+    "file": "favicon-mark.png",
+    "width": 512,
+    "height": 512,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Favicon và app mark",
+    "routes": ["/*"],
+    "alt": "Dấu hiệu bảo vệ số trừu tượng bằng gradient xanh cyan."
+  },
+  {
+    "file": "favicon-mark-180.png",
+    "width": 180,
+    "height": 180,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Apple touch icon",
+    "routes": ["/*"],
+    "alt": "Dấu hiệu bảo vệ số trừu tượng bằng gradient xanh cyan."
+  },
+  {
+    "file": "favicon-mark-32.png",
+    "width": 32,
+    "height": 32,
+    "aspectRatio": "1:1",
+    "background": "transparent",
+    "recommendedUse": "Favicon nhỏ",
+    "routes": ["/*"],
+    "alt": "Dấu hiệu bảo vệ số trừu tượng bằng gradient xanh cyan."
+  }
+]

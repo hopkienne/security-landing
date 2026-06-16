@@ -15,7 +15,9 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "payload": "payload",
-    "seed": "tsx src/seed.ts"
+    "seed": "tsx src/seed.ts",
+    "migrate:catalog": "tsx src/migrate-catalog.ts",
+    "migrate:blog": "tsx src/migrate-blog.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.85.1",
@@ -41,7 +43,7 @@
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.0",
     "dotenv": "^16.4.7",
-    "eslint": "^9.16.0",
+    "eslint": "^10.5.0",
     "eslint-config-next": "15.4.11",
     "tailwindcss": "^4.0.0",
     "tsx": "^4.19.2",
