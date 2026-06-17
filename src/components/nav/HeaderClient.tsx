@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
-import { ArrowRight, ChevronDown, Menu, PhoneCall, ShieldAlert } from 'lucide-react'
+import { AlertTriangle, ArrowRight, ChevronDown, Globe, Menu } from 'lucide-react'
 import type { MegaMenuData } from './nav-data'
 import { vi } from '@/dictionaries/vi'
-import { CTA, BRAND } from '@/brand/tokens'
+import { CTA } from '@/brand/tokens'
 import { cn } from '@/lib/utils'
 import { MobileNav } from './MobileNav'
 import { Logo } from './Logo'
@@ -23,6 +24,13 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
   const [scrolled, setScrolled] = useState(false)
   const [openMega, setOpenMega] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const pathname = usePathname()
+
+  // Only the home page has the dark video hero behind the header. There the
+  // header overlays the video transparently with white text, then flips to the
+  // solid white treatment once the user scrolls (or opens the mega menu).
+  const isHome = pathname === '/'
+  const overHero = isHome && !scrolled && !openMega
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -34,27 +42,33 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
   return (
     <header className="sticky top-0 z-50 w-full" onMouseLeave={() => setOpenMega(false)}>
       {/* Utility bar */}
-      <div className="hidden bg-navy text-white lg:block">
-        <div className="mx-auto flex h-9 w-full max-w-7xl items-center justify-between px-4 text-[13px] sm:px-6 lg:px-8">
+      <div
+        className={cn(
+          'hidden transition-colors duration-300 lg:block',
+          overHero ? 'bg-transparent' : 'bg-white',
+        )}
+      >
+        <div className="mx-auto flex h-9 w-full max-w-7xl items-center justify-end gap-5 px-4 text-[13px] sm:px-6 lg:px-8">
           <Link
             href={vi.routes.contact}
-            className="inline-flex items-center gap-1.5 font-medium text-white/85 transition-colors hover:text-white"
+            className={cn(
+              'inline-flex items-center gap-1.5 font-medium transition-colors',
+              overHero ? 'text-white/85 hover:text-white' : 'text-slate hover:text-primary',
+            )}
           >
-            <ShieldAlert className="h-3.5 w-3.5 text-cyan" />
+            <AlertTriangle className="h-3.5 w-3.5 text-red-500" />
             Đang bị tấn công mạng? Phản ứng khẩn cấp 24/7
           </Link>
-          <div className="flex items-center gap-5 text-white/80">
-            <a
-              href={`tel:${BRAND.phone.replace(/\s/g, '')}`}
-              className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
-            >
-              <PhoneCall className="h-3.5 w-3.5" />
-              {BRAND.phone}
-            </a>
-            <Link href={vi.routes.about} className="transition-colors hover:text-white">
-              Về SecureOps
-            </Link>
-          </div>
+          <button
+            type="button"
+            className={cn(
+              'inline-flex items-center gap-1.5 transition-colors',
+              overHero ? 'text-white/80 hover:text-white' : 'text-slate hover:text-primary',
+            )}
+            aria-label="Chọn ngôn ngữ"
+          >
+            <Globe className="h-3.5 w-3.5" />
+          </button>
         </div>
       </div>
 
@@ -62,20 +76,23 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
       <div
         className={cn(
           'w-full border-b transition-all duration-300',
-          scrolled || openMega
-            ? 'border-border-soft bg-white shadow-[0_4px_24px_-12px_rgba(10,27,61,0.18)]'
-            : 'border-transparent bg-white/85 backdrop-blur',
+          overHero
+            ? 'border-transparent bg-transparent'
+            : scrolled || openMega
+              ? 'border-border-soft bg-white shadow-[0_4px_24px_-12px_rgba(10,27,61,0.18)]'
+              : 'border-transparent bg-white/85 backdrop-blur',
         )}
       >
         <div className="mx-auto flex h-[68px] w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Logo />
+          <Logo tone={overHero ? 'dark' : 'light'} />
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Điều hướng chính">
             <button
               type="button"
               className={cn(
-                'inline-flex items-center gap-1 rounded-md px-3 py-2 text-[15px] font-semibold text-ink transition-colors hover:text-primary',
+                'inline-flex items-center gap-1 rounded-md px-3 py-2 text-[15px] font-semibold transition-colors',
+                overHero ? 'text-white/90 hover:text-white' : 'text-ink hover:text-primary',
                 openMega && 'text-primary',
               )}
               onMouseEnter={() => setOpenMega(true)}
@@ -91,7 +108,10 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-[15px] font-medium text-ink transition-colors hover:text-primary"
+                className={cn(
+                  'rounded-md px-3 py-2 text-[15px] font-medium transition-colors',
+                  overHero ? 'text-white/90 hover:text-white' : 'text-ink hover:text-primary',
+                )}
                 onMouseEnter={() => setOpenMega(false)}
               >
                 {item.label}
@@ -109,7 +129,10 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
             </Link>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink lg:hidden"
+              className={cn(
+                'inline-flex h-10 w-10 items-center justify-center rounded-md lg:hidden',
+                overHero ? 'text-white' : 'text-ink',
+              )}
               onClick={() => setMobileOpen(true)}
               aria-label="Mở menu"
             >

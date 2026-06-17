@@ -34,7 +34,7 @@ const ease = [0.22, 1, 0.36, 1] as const
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy-deep text-white">
+    <section className="relative -mt-[68px] overflow-hidden bg-navy-deep text-white lg:-mt-[105px]">
       {/* Full-section background video (Sophos hero pattern). Plays under all
           hero content; hidden for prefers-reduced-motion via .hero-video CSS,
           leaving the poster image + navy backdrop visible. */}
@@ -62,19 +62,15 @@ export function Hero() {
         aria-hidden
       />
 
-      <Container className="relative z-10 pt-20 sm:pt-24 lg:pt-28">
+      <Container className="relative z-10 pt-32 sm:pt-36 lg:pt-[8.775rem]">
         {/* Centered copy on top of the video */}
         <div className="mx-auto max-w-3xl text-center">
           <motion.span
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease }}
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-turquoise"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan" />
-            </span>
             Nền tảng an ninh mạng thích ứng AI-Native
           </motion.span>
 
@@ -82,9 +78,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.05, ease }}
-            className="mt-5 text-[2.7rem] font-extrabold leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.1rem]"
+            className="mt-5 text-4xl font-semibold leading-[1.08] tracking-[-0.02em] text-white sm:text-5xl lg:text-[3.75rem]"
           >
-            Làm chủ <span className="text-gradient">mọi mối đe dọa</span>
+            Làm chủ mọi mối đe dọa
             <br className="hidden sm:block" /> an ninh mạng
           </motion.h1>
 
@@ -107,16 +103,16 @@ export function Hero() {
           >
             <Link
               href={vi.routes.contact}
-              className="group inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-base font-bold text-white shadow-[0_14px_34px_-10px_rgba(32,6,247,0.75)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark"
+              className="inline-flex items-center rounded-full bg-white px-6 py-3 text-base font-semibold text-navy-deep transition-colors hover:bg-white/90"
             >
               {CTA.primary}
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href={vi.routes.solutions}
-              className="inline-flex items-center rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-base font-semibold text-white backdrop-blur transition-all hover:border-white/50 hover:bg-white/10"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/35 px-6 py-3 text-base font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
             >
               {CTA.secondarySolutions}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </motion.div>
         </div>
@@ -126,7 +122,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 40, scale: 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.25, ease }}
-          className="relative mx-auto mt-14 max-w-5xl"
+          className="relative mx-auto mt-8 max-w-5xl"
         >
           <div
             className="absolute -inset-x-8 -top-6 bottom-0 rounded-[2.5rem] bg-gradient-to-b from-primary/35 via-cyan/10 to-transparent blur-3xl"
@@ -149,27 +145,37 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Three feature cards on top of the video, straddling the seam into white. */}
+        {/* Three white feature cards straddling the bottom edge of the dashboard
+            image and the seam into the white section below (Sophos pattern). */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.45, ease }}
-          className="relative mx-auto mt-12 grid max-w-5xl gap-4 sm:grid-cols-3"
+          className="hero-feature-grid relative z-20 mx-auto -mt-36 grid max-w-[76.25rem] gap-4 sm:-mt-[11.75rem] sm:grid-cols-3 sm:gap-[1.875rem] lg:-mt-[17.25rem] lg:w-[76.25rem] lg:max-w-none"
         >
           {cards.map((c) => (
             <Link
               key={c.tag}
               href={c.href}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.06] p-5 backdrop-blur-md transition-all hover:-translate-y-1 hover:border-cyan/40 hover:bg-white/[0.1]"
+              className="hero-feature-card group flex flex-col rounded-xl border border-border-soft bg-white p-5 shadow-[0_24px_60px_-30px_rgba(8,1,45,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/10 hover:shadow-[0_30px_70px_-30px_rgba(8,1,45,0.55)] lg:h-[10.35rem]"
             >
-              <span className="text-[11px] font-bold uppercase tracking-wider text-cyan">
+              <span className="hero-feature-tag text-[11px] font-bold uppercase tracking-wider text-primary">
                 {c.tag}
               </span>
-              <span className="mt-2 text-base font-bold text-white">{c.title}</span>
-              <span className="mt-2 flex-1 text-sm leading-relaxed text-white/65">{c.desc}</span>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white/90">
-                Tìm hiểu
-                <ArrowRight className="h-4 w-4 text-cyan transition-transform group-hover:translate-x-0.5" />
+              <span className="hero-feature-title mt-2 text-base font-bold leading-tight text-ink">
+                {c.title}
+              </span>
+              <span className="hero-feature-desc mt-2 flex-1 text-sm leading-snug text-slate">
+                {c.desc}
+              </span>
+              <span className="mt-3 flex justify-end">
+                <span className="sr-only">Tìm hiểu {c.title}</span>
+                <span
+                  className="hero-feature-icon inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-white shadow-[0_10px_24px_-10px_rgba(32,6,247,0.8)] transition-colors group-hover:bg-primary-dark"
+                  aria-hidden
+                >
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
               </span>
             </Link>
           ))}
@@ -177,7 +183,7 @@ export function Hero() {
       </Container>
 
       {/* Seam spacer into the white content below */}
-      <div className="h-20 sm:h-24" />
+      <div className="h-10 sm:h-14" />
     </section>
   )
 }
