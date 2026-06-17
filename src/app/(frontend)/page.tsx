@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Hero } from '@/components/sections/Hero'
-import { LogoMarquee } from '@/components/sections/LogoMarquee'
-import { ValueProps } from '@/components/sections/ValueProps'
+import { DefeatCyberattacks } from '@/components/sections/DefeatCyberattacks'
+import { ProofBand } from '@/components/sections/ProofBand'
+import { AdvantageSection } from '@/components/sections/AdvantageSection'
 import { FocusSection } from '@/components/sections/FocusSection'
 import { FeatureBlock } from '@/components/sections/FeatureBlock'
 import { TestimonialCarousel } from '@/components/sections/TestimonialCarousel'
@@ -38,11 +39,11 @@ export default async function HomePage() {
     <>
       <Hero />
 
-      <LogoMarquee />
+      <DefeatCyberattacks />
 
-      <ValueProps />
+      <ProofBand />
 
-      <StatsBand />
+      <AdvantageSection />
 
       <FocusSection />
 
@@ -140,29 +141,6 @@ export default async function HomePage() {
 
       <CTASection />
     </>
-  )
-}
-
-function StatsBand() {
-  const stats = [
-    { value: '24/7', label: 'Giám sát & phản ứng sự cố' },
-    { value: '52%', label: 'Sự cố được AI xử lý tự động' },
-    { value: '99,9%', label: 'Tỷ lệ phát hiện mối đe dọa' },
-    { value: '<15ph', label: 'Thời gian phản ứng trung bình' },
-  ]
-  return (
-    <section className="pb-4">
-      <Container>
-        <div className="grid grid-cols-2 gap-4 rounded-[var(--radius-brand-xl)] border border-border-soft bg-white p-8 shadow-[0_20px_50px_-30px_rgba(10,27,61,0.3)] lg:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <p className="text-4xl font-extrabold tracking-tight text-primary">{s.value}</p>
-              <p className="mt-2 text-sm text-slate">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </section>
   )
 }
 
