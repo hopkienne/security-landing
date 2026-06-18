@@ -4,6 +4,7 @@ import { Hero } from '@/components/sections/Hero'
 import { DefeatCyberattacks } from '@/components/sections/DefeatCyberattacks'
 import { ProofBand } from '@/components/sections/ProofBand'
 import { AdvantageSection } from '@/components/sections/AdvantageSection'
+import { FloatingThreatsSection } from '@/components/sections/FloatingThreatsSection'
 import { FocusSection } from '@/components/sections/FocusSection'
 import { FeatureBlock } from '@/components/sections/FeatureBlock'
 import { TestimonialCarousel } from '@/components/sections/TestimonialCarousel'
@@ -44,6 +45,8 @@ export default async function HomePage() {
       <ProofBand />
 
       <AdvantageSection />
+
+      <FloatingThreatsSection />
 
       <FocusSection />
 

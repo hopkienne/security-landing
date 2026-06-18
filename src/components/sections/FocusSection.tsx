@@ -1,279 +1,202 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
-import { motion, useScroll, useTransform, type MotionValue } from 'motion/react'
-import { Brain, Network, ShieldCheck } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import { motion, useMotionValueEvent, useScroll } from 'motion/react'
 import { Container } from '@/components/ui/Container'
+import { cn } from '@/lib/utils'
 
-const panels = [
+const slides = [
   {
-    icon: ShieldCheck,
-    eyebrow: 'Phòng thủ thích ứng',
-    title: 'Dynamic Defenses',
-    desc: 'Tự điều chỉnh hàng rào bảo vệ theo tín hiệu thời gian thực, chặn kỹ thuật tấn công trước khi lan rộng.',
-    stat: '32%',
-    statLabel: 'tấn công khởi đầu từ lỗ hổng bị khai thác',
+    title: 'Phòng thủ linh hoạt',
+    description:
+      'Lớp bảo vệ được cập nhật theo tín hiệu thời gian thực, trong khi cơ chế phòng thủ thích ứng tự động phản ứng trước mối đe dọa.',
+    image: '/secureops/focus-scroll-secureops-1.webp',
+    imageAlt: 'Bảng điều khiển SecureOps hiển thị cảnh báo và trạng thái bảo mật',
+    cta: 'Tìm hiểu SecureOps Central',
+    href: '/san-pham',
   },
   {
-    icon: Brain,
-    eyebrow: 'AI đã được kiểm chứng',
-    title: 'Battle-proven AI',
-    desc: 'AI phân tích tín hiệu ở quy mô lớn, ưu tiên cảnh báo quan trọng và tự động xử lý sự cố lặp lại.',
-    stat: '52%',
-    statLabel: 'sự cố được AI xử lý đầu-cuối',
+    title: 'AI đã được kiểm chứng',
+    description:
+      'Hơn 50 năng lực GenAI và học sâu giúp tăng cường phòng thủ, ưu tiên sự cố quan trọng và tăng tốc vận hành an ninh.',
+    image: '/secureops/focus-scroll-secureops-2.webp',
+    imageAlt: 'Các màn hình phân tích sự cố bảo mật được hỗ trợ bởi AI',
+    cta: 'Xem mô phỏng tấn công',
+    href: 'https://www.youtube.com/watch?v=LeU-hFAzGuM',
   },
   {
-    icon: Network,
-    eyebrow: 'Hệ sinh thái mở',
-    title: 'Open Ecosystem',
-    desc: 'Kết nối công cụ bảo mật và IT hiện có để tạo một quy trình điều tra thống nhất, không còn điểm mù.',
-    stat: '350+',
-    statLabel: 'tích hợp bảo mật và IT sẵn có',
+    title: 'Hệ sinh thái mở',
+    description:
+      'SecureOps Central kết nối với sản phẩm SecureOps, công cụ từ nhà cung cấp khác hoặc mọi kết hợp mà hạ tầng của bạn đang sử dụng.',
+    image: '/secureops/focus-scroll-secureops-3.webp',
+    imageAlt: 'Lưới tích hợp hệ sinh thái bảo mật SecureOps',
+    cta: 'Khám phá tích hợp SecureOps',
+    href: '/giai-phap',
   },
 ]
 
 export function FocusSection() {
-  const ref = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end end'],
+    target: sectionRef,
+    offset: ['start 45%', 'end 55%'],
+  })
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    const nextIndex = Math.min(slides.length - 1, Math.max(0, Math.floor(latest * slides.length)))
+    setActiveIndex(nextIndex)
   })
 
   return (
-    <section className="bg-navy text-white">
-      <MobileFocus />
-
-      <div ref={ref} className="relative hidden lg:block" style={{ height: `${panels.length * 80}vh` }}>
-        <div className="sticky top-0 flex min-h-screen items-center overflow-hidden py-16">
-          <FocusBackdrop />
-
-          <Container className="relative grid items-center gap-14 lg:grid-cols-[0.88fr_1.12fr]">
-            <div>
-              <p className="text-sm font-bold uppercase tracking-normal text-cyan">
-                Nền tảng AI-native
-              </p>
-              <h2 className="mt-4 max-w-xl text-4xl font-extrabold leading-tight tracking-normal">
-                Dynamic Defenses, Battle-proven AI và Open Ecosystem
-              </h2>
-              <p className="mt-5 max-w-md text-lg leading-relaxed text-white/65">
-                Một lớp vận hành thống nhất giúp đội ngũ bảo mật phòng ngừa, điều tra và phản ứng
-                nhanh hơn.
-              </p>
-
-              <div className="mt-10 space-y-5">
-                {panels.map((panel, i) => (
-                  <ProgressRow
-                    key={panel.title}
-                    index={i}
-                    total={panels.length}
-                    progress={scrollYProgress}
-                    label={panel.title}
-                    eyebrow={panel.eyebrow}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="relative h-[500px]">
-              <div className="absolute inset-0 overflow-hidden rounded-[2rem] border border-white/10 bg-oxford">
-                <Image
-                  src="/secureops/products-security-platform.webp"
-                  alt="Nền tảng SecureOps hợp nhất dữ liệu bảo mật và quy trình phản ứng"
-                  fill
-                  sizes="(min-width: 1024px) 52vw, 100vw"
-                  className="object-cover opacity-55 mix-blend-screen"
-                />
-                <div
-                  className="absolute inset-0 bg-gradient-to-br from-navy/30 via-navy/68 to-navy"
-                  aria-hidden
-                />
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan/70 to-transparent" />
-              </div>
-
-              <div className="absolute left-8 top-8">
-                <p className="text-xs font-bold uppercase tracking-normal text-cyan">
-                  SecureOps Platform
-                </p>
-                <p className="mt-1 text-sm text-white/65">Telemetry, AI và chuyên gia trên một luồng</p>
-              </div>
-
-              {panels.map((panel, i) => (
-                <Panel
-                  key={panel.title}
-                  index={i}
-                  total={panels.length}
-                  progress={scrollYProgress}
-                  panel={panel}
-                />
-              ))}
-            </div>
-          </Container>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function MobileFocus() {
-  return (
-    <div className="relative overflow-hidden py-20 lg:hidden">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-oxford py-16 text-white md:overflow-visible md:py-20 lg:py-32"
+    >
       <FocusBackdrop />
-      <Container className="relative">
-        <p className="text-sm font-bold uppercase tracking-normal text-cyan">Nền tảng AI-native</p>
-        <h2 className="mt-4 text-3xl font-extrabold leading-tight tracking-normal">
-          Dynamic Defenses, Battle-proven AI và Open Ecosystem
-        </h2>
-        <p className="mt-5 text-base leading-relaxed text-white/65">
-          Một lớp vận hành thống nhất giúp phòng ngừa, điều tra và phản ứng nhanh hơn.
-        </p>
 
-        <div className="relative mt-9 aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-white/10 bg-oxford">
-          <Image
-            src="/secureops/products-security-platform.webp"
-            alt="Nền tảng SecureOps hợp nhất dữ liệu bảo mật và quy trình phản ứng"
-            fill
-            sizes="100vw"
-            className="object-cover opacity-60 mix-blend-screen"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/35 to-transparent" />
+      <Container className="relative z-10">
+        <div className="mx-auto mb-[62px] max-w-[1035px] text-center">
+          <h2 className="text-[2.15rem] font-semibold leading-[1.08] tracking-normal text-white md:text-[3rem] lg:text-[4.25rem]">
+            Nền tảng an ninh mạng AI-native thích ứng
+          </h2>
+          <p className="mx-auto mt-5 max-w-[890px] text-base leading-[1.7] text-white/82 md:text-lg lg:text-xl">
+            SecureOps Central mang đến lớp bảo vệ mạnh mẽ cho tổ chức và khuếch đại năng lực của
+            đội ngũ phòng thủ. Phòng thủ linh hoạt, AI đã được kiểm chứng và hệ sinh thái tích hợp
+            mở cùng hội tụ trong một nền tảng an ninh mạng AI-native.
+          </p>
         </div>
 
-        <div className="mt-8 divide-y divide-white/10 border-y border-white/10">
-          {panels.map((panel) => (
-            <MobilePanel key={panel.title} panel={panel} />
-          ))}
+        <div className="hidden items-start gap-8 md:flex md:flex-row md:flex-nowrap xl:gap-20">
+          <div className="sticky top-[120px] h-[430px] flex-[0_0_50%] lg:top-[150px] lg:h-[520px] xl:top-[180px] xl:flex-[0_0_60%]">
+            {slides.map((slide, index) => (
+              <motion.div
+                key={slide.title}
+                animate={{
+                  opacity: activeIndex === index ? 1 : 0,
+                  scale: activeIndex === index ? 1 : 0.985,
+                }}
+                transition={{ duration: 0.45, ease: 'easeOut' }}
+                className="absolute left-0 top-0 h-full w-full"
+                aria-hidden={activeIndex !== index}
+              >
+                <Image
+                  src={slide.image}
+                  alt={slide.imageAlt}
+                  fill
+                  sizes="(min-width: 1280px) 732px, 50vw"
+                  className="object-contain"
+                  priority={index === 0}
+                />
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex-[0_0_calc(50%_-_40px)] xl:flex-[0_0_calc(40%_-_80px)]">
+            {slides.map((slide, index) => (
+              <article
+                key={slide.title}
+                className={cn(
+                  'flex min-h-[270px] flex-col py-12 xl:min-h-[450px] xl:pt-[105px]',
+                  index === slides.length - 1 ? 'xl:pb-20' : 'xl:pb-[155px]',
+                )}
+                data-card={`slide-${index}`}
+              >
+                <h3 className="mb-5 text-3xl font-semibold leading-tight tracking-normal text-white lg:text-[2.45rem]">
+                  {slide.title}
+                </h3>
+                <p className="text-base leading-[1.7] text-white/84 lg:text-lg">{slide.description}</p>
+                <FocusLink href={slide.href} className="mt-[43px]">
+                  {slide.cta}
+                </FocusLink>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="md:hidden">
+          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3">
+            {slides.map((slide) => (
+              <article
+                key={slide.title}
+                className="flex min-w-[86%] snap-center flex-col rounded-[10px] border border-white/30 bg-white/10 pb-6 pt-3 backdrop-blur-[15px]"
+              >
+                <div className="relative h-[191px] w-full">
+                  <Image
+                    src={slide.image}
+                    alt={slide.imageAlt}
+                    fill
+                    sizes="86vw"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col px-6 pt-7">
+                  <h3 className="text-2xl font-semibold leading-tight tracking-normal text-white">
+                    {slide.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-[1.65] text-white/82">{slide.description}</p>
+                  <FocusLink href={slide.href} className="mt-8">
+                    {slide.cta}
+                  </FocusLink>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-6 h-1.25 overflow-hidden rounded-full bg-white/20" aria-hidden>
+            <div className="h-full w-1/3 rounded-full bg-white" />
+          </div>
         </div>
       </Container>
-    </div>
+    </section>
   )
 }
 
 function FocusBackdrop() {
   return (
-    <>
-      <div className="bg-dotgrid absolute inset-0 opacity-35" aria-hidden />
-      <div
-        className="absolute -right-40 top-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl"
+    <div className="pointer-events-none absolute right-0 top-0 h-[1016px] w-[499px] md:h-full md:w-full">
+      <Image
+        src="/secureops/focus-scroll-bg.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="h-full w-full object-cover"
         aria-hidden
       />
-      <div
-        className="absolute -left-32 bottom-0 h-80 w-80 rounded-full bg-cyan/10 blur-3xl"
-        aria-hidden
-      />
-    </>
-  )
-}
-
-function ProgressRow({
-  index,
-  total,
-  progress,
-  label,
-  eyebrow,
-}: {
-  index: number
-  total: number
-  progress: MotionValue<number>
-  label: string
-  eyebrow: string
-}) {
-  const start = index / total
-  const end = (index + 1) / total
-  const fill = useTransform(progress, [start, end], ['0%', '100%'])
-  const opacity = useTransform(
-    progress,
-    [start - 0.08, start, end, end + 0.08],
-    [0.45, 1, 1, 0.45],
-  )
-
-  return (
-    <motion.div style={{ opacity }} className="flex items-center gap-4">
-      <span className="text-sm font-bold tabular-nums text-white/45">0{index + 1}</span>
-      <div className="flex-1">
-        <p className="text-xs font-semibold uppercase tracking-normal text-cyan">{eyebrow}</p>
-        <p className="text-lg font-bold tracking-normal text-white">{label}</p>
-        <div className="mt-2 h-[3px] w-full overflow-hidden rounded-full bg-white/10">
-          <motion.div
-            style={{ width: fill }}
-            className="h-full rounded-full bg-gradient-to-r from-cyan to-primary"
-          />
-        </div>
-      </div>
-    </motion.div>
-  )
-}
-
-function Panel({
-  index,
-  total,
-  progress,
-  panel,
-}: {
-  index: number
-  total: number
-  progress: MotionValue<number>
-  panel: (typeof panels)[number]
-}) {
-  const start = index / total
-  const end = (index + 1) / total
-  const pad = 0.08
-  const opacityInput =
-    index === 0
-      ? [0, end - pad, end + pad]
-      : index === total - 1
-        ? [start - pad, start + pad, 1]
-        : [start - pad, start + pad, end - pad, end + pad]
-  const opacityOutput =
-    index === 0 ? [1, 1, 0] : index === total - 1 ? [0, 1, 1] : [0, 1, 1, 0]
-  const opacity = useTransform(progress, opacityInput, opacityOutput)
-  const y = useTransform(progress, [start, end], [24, -24])
-  const Icon = panel.icon
-
-  return (
-    <motion.div
-      style={{ opacity, y }}
-      className="absolute inset-x-8 bottom-8 rounded-2xl border border-white/10 bg-navy/78 p-7 shadow-[0_24px_80px_-45px_rgba(0,0,0,0.9)] backdrop-blur-md"
-    >
-      <div className="flex items-start gap-4">
-        <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan to-primary text-white">
-          <Icon className="h-6 w-6" />
-        </span>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-normal text-cyan">{panel.eyebrow}</p>
-          <h3 className="mt-2 text-2xl font-extrabold tracking-normal">{panel.title}</h3>
-          <p className="mt-3 max-w-xl leading-relaxed text-white/70">{panel.desc}</p>
-        </div>
-      </div>
-      <div className="mt-6 flex items-end gap-3 border-t border-white/10 pt-5">
-        <span className="text-4xl font-extrabold tracking-normal text-gradient">{panel.stat}</span>
-        <span className="pb-1 text-sm text-white/60">{panel.statLabel}</span>
-      </div>
-    </motion.div>
-  )
-}
-
-function MobilePanel({ panel }: { panel: (typeof panels)[number] }) {
-  const Icon = panel.icon
-
-  return (
-    <div className="py-6">
-      <div className="flex items-start gap-4">
-        <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-cyan">
-          <Icon className="h-5 w-5" />
-        </span>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-normal text-cyan">{panel.eyebrow}</p>
-          <h3 className="mt-2 text-xl font-extrabold tracking-normal">{panel.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-white/68">{panel.desc}</p>
-          <p className="mt-4 text-sm text-white/60">
-            <span className="mr-2 text-2xl font-extrabold tracking-normal text-gradient">
-              {panel.stat}
-            </span>
-            {panel.statLabel}
-          </p>
-        </div>
-      </div>
     </div>
+  )
+}
+
+function FocusLink({
+  href,
+  children,
+  className,
+}: {
+  href: string
+  children: string
+  className?: string
+}) {
+  const classes = cn(
+    'inline-flex w-fit items-center gap-2 text-base font-bold text-white underline-offset-4 transition-colors hover:text-cyan hover:underline',
+    className,
+  )
+
+  if (href.startsWith('http')) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+        {children}
+        <ArrowRight className="h-4 w-4" />
+      </a>
+    )
+  }
+
+  return (
+    <Link href={href} className={classes}>
+      {children}
+      <ArrowRight className="h-4 w-4" />
+    </Link>
   )
 }

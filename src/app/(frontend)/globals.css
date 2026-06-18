@@ -4,8 +4,8 @@
  * SecureOps theme — Sophos-inspired enterprise cybersecurity design language.
  * Palette and tokens mirror the real Sophos design system: electric blue as the
  * action colour, cyan/turquoise gradient accents (no orange), deep navy darks,
- * Inter typeface. Brand tokens are exposed to Tailwind v4 via @theme so utility
- * classes (bg-primary, text-ink, rounded-brand…) stay in sync with
+ * Plus Jakarta Sans typeface. Brand tokens are exposed to Tailwind v4 via @theme
+ * so utility classes (bg-primary, text-ink, rounded-brand…) stay in sync with
  * src/brand/tokens.ts. Re-skin the site by editing these values.
  */
 @theme {
@@ -29,8 +29,8 @@
   --radius-brand-lg: 1.25rem;
   --radius-brand-xl: 2.5rem;
 
-  --font-sans: var(--font-inter), 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: var(--font-jakarta), 'Plus Jakarta Sans', ui-sans-serif, system-ui,
+    -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   --shadow-glow: 0 24px 60px -18px rgba(32, 6, 247, 0.35);
 
@@ -49,8 +49,6 @@ body {
   background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  /* Sophos enables the ss04 stylistic set on Inter. */
-  font-feature-settings: 'ss04' on;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

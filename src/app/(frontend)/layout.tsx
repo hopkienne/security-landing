@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/nav/Header'
 import { Footer } from '@/components/nav/Footer'
@@ -7,10 +7,10 @@ import { SEOJsonLd } from '@/components/SEOJsonLd'
 import { organizationJsonLd } from '@/lib/jsonld'
 import { buildMetadata, SITE_URL } from '@/lib/seo'
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin', 'latin-ext', 'vietnamese'],
   weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-inter',
+  variable: '--font-jakarta',
   display: 'swap',
 })
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={inter.variable}>
+    <html lang="vi" className={plusJakarta.variable}>
       <body className="min-h-screen bg-bg antialiased">
         <SEOJsonLd data={organizationJsonLd()} />
         <Header />

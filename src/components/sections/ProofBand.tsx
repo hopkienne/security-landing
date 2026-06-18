@@ -1,58 +1,96 @@
-import { Container } from '@/components/ui/Container'
+import Image from 'next/image'
 import { Reveal } from '@/components/ui/Reveal'
 
 const logos = [
-  'NovaBank',
-  'VietPharma',
-  'TechHub',
-  'GreenLogistics',
-  'MetroRetail',
-  'CloudWave',
-]
-
-const stats = [
-  { value: '24/7', label: 'Giám sát và phản ứng sự cố' },
-  { value: '52%', label: 'Sự cố được AI xử lý tự động' },
-  { value: '99,9%', label: 'Tỷ lệ phát hiện mối đe dọa' },
-  { value: '<15ph', label: 'Thời gian phản ứng trung bình' },
+  {
+    src: '/secureops/proof-logo-idc.svg',
+    alt: 'Leading security professional IDC',
+    width: 106,
+  },
+  {
+    src: '/secureops/proof-logo-2.svg',
+    alt: 'Security industry recognition logo 2',
+    width: 95,
+  },
+  {
+    src: '/secureops/proof-logo-3.svg',
+    alt: 'Security industry recognition logo 3',
+    width: 114,
+  },
+  {
+    src: '/secureops/proof-logo-4.svg',
+    alt: 'Security industry recognition logo 4',
+    width: 87,
+  },
+  {
+    src: '/secureops/proof-logo-5.svg',
+    alt: 'Security industry recognition logo 5',
+    width: 210,
+  },
+  {
+    src: '/secureops/proof-logo-6.svg',
+    alt: 'Security industry recognition logo 6',
+    width: 50,
+  },
+  {
+    src: '/secureops/proof-logo-7.svg',
+    alt: 'Security industry recognition logo 7',
+    width: 113,
+  },
+  {
+    src: '/secureops/proof-logo-8.svg',
+    alt: 'Security industry recognition logo 8',
+    width: 210,
+  },
+  {
+    src: '/secureops/proof-logo-9.svg',
+    alt: 'Security industry recognition logo 9',
+    width: 210,
+  },
 ]
 
 export function ProofBand() {
   return (
-    <section className="bg-[#edf2f9] py-14 sm:py-16">
-      <Container>
+    <section
+      className="overflow-hidden bg-[#eef4fb] pb-14 pt-5 sm:pb-16 lg:pb-28 lg:pt-0"
+      aria-label="Logo carousel"
+    >
+      <div className="mx-auto w-full">
         <Reveal>
-          <p className="text-center text-sm font-bold uppercase tracking-normal text-slate">
-            Đồng hành cùng các doanh nghiệp cần phòng thủ liên tục
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.05}>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
-            {logos.map((logo) => (
-              <span
-                key={logo}
-                className="text-lg font-extrabold tracking-normal text-slate/45 transition-colors hover:text-primary"
-              >
-                {logo}
-              </span>
-            ))}
+          <div className="mx-auto mb-7 max-w-[310px] text-center lg:max-w-max">
+            <p className="text-xl font-medium leading-snug tracking-normal text-ink sm:text-2xl">
+              Chuyên gia an ninh hàng đầu khuyên dùng SecureOps
+            </p>
           </div>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-2 border-y border-[#d7e2ef] lg:grid-cols-4">
-          {stats.map((stat, index) => (
-            <Reveal key={stat.label} delay={index * 0.05}>
-              <div className="h-full px-3 py-7 text-center sm:px-6 lg:border-l lg:border-[#d7e2ef] lg:first:border-l-0">
-                <p className="text-4xl font-extrabold tracking-normal text-primary sm:text-5xl">
-                  {stat.value}
-                </p>
-                <p className="mx-auto mt-2 max-w-40 text-sm leading-snug text-slate">{stat.label}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Container>
+        <Reveal delay={0.05}>
+          <div className="group/marquee overflow-hidden py-2">
+            <div
+              className="marquee-track items-center gap-20 pr-20 lg:gap-24 lg:pr-24"
+              style={{ animationDuration: '140s' }}
+            >
+              {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+                <div
+                  key={`${logo.src}-${index}`}
+                  className="flex shrink-0 items-center justify-center"
+                  aria-hidden={index >= logos.length}
+                >
+                  <Image
+                    src={logo.src}
+                    alt={index < logos.length ? logo.alt : ''}
+                    width={logo.width}
+                    height={80}
+                    loading="lazy"
+                    draggable={false}
+                    className="h-10 w-auto object-contain lg:h-20"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </div>
     </section>
   )
 }
