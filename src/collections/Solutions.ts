@@ -3,7 +3,7 @@ import { adminsOnly, publishedOrAdmin } from '@/access'
 import { slugField } from '@/fields/slug'
 import { statusField, sortOrderField } from '@/fields/status'
 import { seoField } from '@/fields/seo'
-import { ctasField, bulletArray } from '@/fields/common'
+import { ctasField, bulletArray, detailSectionsField } from '@/fields/common'
 
 export const Solutions: CollectionConfig = {
   slug: 'solutions',
@@ -37,6 +37,7 @@ export const Solutions: CollectionConfig = {
             { name: 'overview', type: 'richText', label: 'Tổng quan' },
             bulletArray('painPoints', 'Thách thức'),
             bulletArray('benefits', 'Lợi ích'),
+            detailSectionsField,
             ctasField,
           ],
         },
@@ -67,6 +68,26 @@ export const Solutions: CollectionConfig = {
     },
     sortOrderField,
     statusField,
+    {
+      name: 'catalogManaged',
+      type: 'checkbox',
+      defaultValue: false,
+      index: true,
+      label: 'Catalog managed',
+      admin: { position: 'sidebar', readOnly: true },
+    },
+    {
+      name: 'catalogSource',
+      type: 'text',
+      label: 'Catalog source',
+      admin: { position: 'sidebar', readOnly: true },
+    },
+    {
+      name: 'catalogSourcePath',
+      type: 'textarea',
+      label: 'Catalog source path',
+      admin: { position: 'sidebar', readOnly: true },
+    },
     slugField('name'),
   ],
 }

@@ -24,14 +24,18 @@ export function articleJsonLd(opts: {
   url: string
   image?: string | null
   datePublished?: string | null
+  dateModified?: string | null
+  wordCount?: number | null
 }): JsonLd {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: opts.title,
     description: opts.description || undefined,
     image: opts.image || undefined,
     datePublished: opts.datePublished || undefined,
+    dateModified: opts.dateModified || opts.datePublished || undefined,
+    wordCount: opts.wordCount || undefined,
     mainEntityOfPage: opts.url,
     author: { '@type': 'Organization', name: BRAND.name },
     publisher: { '@type': 'Organization', name: BRAND.name },

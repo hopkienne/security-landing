@@ -230,6 +230,9 @@ export interface ProductCategory {
    */
   sortOrder?: number | null;
   status: 'draft' | 'published';
+  catalogManaged?: boolean | null;
+  catalogSource?: string | null;
+  catalogSourcePath?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -278,6 +281,33 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  detailSections?:
+    | {
+        heading: string;
+        body: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        bullets?:
+          | {
+              item: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   ctas?:
     | {
         label: string;
@@ -314,6 +344,9 @@ export interface Product {
    */
   sortOrder?: number | null;
   status: 'draft' | 'published';
+  catalogManaged?: boolean | null;
+  catalogSource?: string | null;
+  catalogSourcePath?: string | null;
   /**
    * Tự sinh từ tên. Để trống để hệ thống tự tạo.
    */
@@ -357,6 +390,33 @@ export interface Solution {
         id?: string | null;
       }[]
     | null;
+  detailSections?:
+    | {
+        heading: string;
+        body: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        bullets?:
+          | {
+              item: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   ctas?:
     | {
         label: string;
@@ -392,6 +452,9 @@ export interface Solution {
    */
   sortOrder?: number | null;
   status: 'draft' | 'published';
+  catalogManaged?: boolean | null;
+  catalogSource?: string | null;
+  catalogSourcePath?: string | null;
   /**
    * Tự sinh từ tên. Để trống để hệ thống tự tạo.
    */
@@ -417,6 +480,9 @@ export interface SolutionCategory {
    */
   sortOrder?: number | null;
   status: 'draft' | 'published';
+  catalogManaged?: boolean | null;
+  catalogSource?: string | null;
+  catalogSourcePath?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -869,6 +935,9 @@ export interface ProductCategoriesSelect<T extends boolean = true> {
   description?: T;
   sortOrder?: T;
   status?: T;
+  catalogManaged?: T;
+  catalogSource?: T;
+  catalogSourcePath?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -899,6 +968,19 @@ export interface ProductsSelect<T extends boolean = true> {
         item?: T;
         id?: T;
       };
+  detailSections?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+        bullets?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   ctas?:
     | T
     | {
@@ -919,6 +1001,9 @@ export interface ProductsSelect<T extends boolean = true> {
   image?: T;
   sortOrder?: T;
   status?: T;
+  catalogManaged?: T;
+  catalogSource?: T;
+  catalogSourcePath?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -934,6 +1019,9 @@ export interface SolutionCategoriesSelect<T extends boolean = true> {
   description?: T;
   sortOrder?: T;
   status?: T;
+  catalogManaged?: T;
+  catalogSource?: T;
+  catalogSourcePath?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -958,6 +1046,19 @@ export interface SolutionsSelect<T extends boolean = true> {
         item?: T;
         id?: T;
       };
+  detailSections?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+        bullets?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+        id?: T;
+      };
   ctas?:
     | T
     | {
@@ -977,6 +1078,9 @@ export interface SolutionsSelect<T extends boolean = true> {
   image?: T;
   sortOrder?: T;
   status?: T;
+  catalogManaged?: T;
+  catalogSource?: T;
+  catalogSourcePath?: T;
   slug?: T;
   updatedAt?: T;
   createdAt?: T;

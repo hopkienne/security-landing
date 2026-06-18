@@ -117,6 +117,7 @@ export default async function ProductDetailPage({
               features={product.features?.map((f) => f.item) ?? []}
               benefits={product.benefits?.map((b) => b.item) ?? []}
             />
+            <DetailSections sections={product.detailSections ?? []} />
           </div>
           <aside className="space-y-6">
             {relatedSolutions.length > 0 && (
@@ -152,6 +153,35 @@ export default async function ProductDetailPage({
 
       <CTASection />
     </>
+  )
+}
+
+function DetailSections({
+  sections,
+}: {
+  sections: NonNullable<Product['detailSections']>
+}) {
+  if (sections.length === 0) return null
+
+  return (
+    <div className="mt-12 space-y-10 border-t border-border-soft pt-10">
+      {sections.map((section) => (
+        <section key={section.id ?? section.heading} className="space-y-4">
+          <h2 className="text-2xl font-semibold tracking-tight text-ink">{section.heading}</h2>
+          <RichText data={section.body} />
+          {section.bullets && section.bullets.length > 0 && (
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {section.bullets.map((bullet) => (
+                <li key={bullet.id ?? bullet.item} className="flex items-start gap-2 text-sm text-slate">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>{bullet.item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
   )
 }
 

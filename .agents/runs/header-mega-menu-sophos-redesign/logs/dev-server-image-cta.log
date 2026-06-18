@@ -1,0 +1,114 @@
+
+> secureops@1.0.0 dev
+> next dev --port 3001
+
+   ▲ Next.js 15.4.11
+   - Local:        http://localhost:3001
+   - Network:      http://100.65.254.10:3001
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 4.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 7.1s (1695 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 3.4s (1669 modules)
+ GET / 404 in 11246ms
+ ✓ Compiled in 396ms (635 modules)
+ ✓ Compiled in 342ms (635 modules)
+[⣷] Pulling schema from database...
+[2K[1G[⣯] Pulling schema from database...
+[2K[1G[⣟] Pulling schema from database...
+[2K[1G[⡿] Pulling schema from database...
+[2K[1G[⢿] Pulling schema from database...
+[2K[1G[⣻] Pulling schema from database...
+ ✓ Compiled in 504ms (635 modules)
+[2K[1G[⣽] Pulling schema from database...
+[2K[1G[⣷] Pulling schema from database...
+[2K[1G[⣯] Pulling schema from database...
+[2K[1G[⣟] Pulling schema from database...
+[2K[1G[⡿] Pulling schema from database...
+[2K[1G[⢿] Pulling schema from database...
+[2K[1G[⣻] Pulling schema from database...
+[2K[1G[✓] Pulling schema from database...
+[21:13:11] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+ GET / 200 in 6167ms
+ GET / 200 in 2098ms
+ ✓ Compiled in 401ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 503ms
+ ✓ Compiled in 299ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 453ms
+ ✓ Compiled in 323ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 490ms
+ ✓ Compiled in 303ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 515ms
+ ✓ Compiled in 364ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 499ms
+ ✓ Compiled in 404ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 478ms
+ ✓ Compiled in 416ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 672ms
+ ✓ Compiled in 447ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 1056ms
+ ✓ Compiled in 420ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 731ms
+ ✓ Compiled in 567ms (635 modules)
+ GET / 200 in 2175ms
+ ✓ Compiled in 311ms (635 modules)
+ ✓ Compiled in 380ms (635 modules)
+ ✓ Compiled in 490ms (631 modules)
+ ✓ Compiled in 323ms (631 modules)
+ ✓ Compiled in 229ms (631 modules)
+ ✓ Compiled in 231ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ ✓ Compiled in 362ms (631 modules)
+ GET / 200 in 1669ms
+ ✓ Compiled in 360ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1969ms (1683 modules)
+ GET /_next/static/webpack/04e74c53f69a8174.webpack.hot-update.json 404 in 2416ms
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 3640ms
+ GET / 200 in 1765ms
+ GET / 200 in 3617ms
+ ✓ Compiled in 451ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET /_next/static/webpack/ba982d391ae58ab0.webpack.hot-update.json 404 in 201ms
+ GET / 200 in 1764ms
+ GET / 200 in 1971ms
+ ✓ Compiled in 365ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET /_next/static/webpack/0ce53e31e4c49009.webpack.hot-update.json 404 in 209ms
+ GET / 200 in 1388ms
+ GET / 200 in 1607ms
+ ✓ Compiled in 331ms (635 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET /_next/static/webpack/2f0e01cb856b9885.webpack.hot-update.json 404 in 155ms
+ GET / 200 in 1412ms
+ GET / 200 in 1602ms
+[?25h

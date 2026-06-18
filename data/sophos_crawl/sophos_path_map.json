@@ -1,0 +1,313 @@
+{
+  "description": "Path groups under /services and /solutions. Detail pages are the preferred pages for content research.",
+  "groups": [
+    {
+      "path_group": "services",
+      "total_pages": 5,
+      "detail_pages": 5,
+      "pages": [
+        {
+          "role": "detail",
+          "kind": "service",
+          "name": "Penetration Testing",
+          "url": "https://www.sophos.com/en-gb/services/advisory-services/penetration-testing",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "service",
+          "name": "AI speed. Human judgment.",
+          "url": "https://www.sophos.com/en-gb/services/managed-detection-and-response",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "service",
+          "name": "Expert-led threat detection and response for Microsoft environments",
+          "url": "https://www.sophos.com/en-gb/services/managed-detection-and-response/microsoft",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "service",
+          "name": "Sophos Managed Risk",
+          "url": "https://www.sophos.com/en-gb/services/managed-risk",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "service",
+          "name": "Sophos Security Services Retainer",
+          "url": "https://www.sophos.com/en-gb/services/security-services-retainer",
+          "canonical_duplicate_of": ""
+        }
+      ]
+    },
+    {
+      "path_group": "solutions",
+      "total_pages": 7,
+      "detail_pages": 6,
+      "pages": [
+        {
+          "role": "detail",
+          "kind": "solution",
+          "name": "Unified cloud security, from edge to workload.",
+          "url": "https://www.sophos.com/en-gb/public-cloud",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution",
+          "name": "AI-powered cyber defenses",
+          "url": "https://www.sophos.com/en-gb/solutions/ai-cybersecurity",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution",
+          "name": "Sophos AI Assistant",
+          "url": "https://www.sophos.com/en-gb/solutions/ai-cybersecurity/ai-assistant",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution",
+          "name": "AI for cybersecurity toolkit",
+          "url": "https://www.sophos.com/en-gb/solutions/ai-cybersecurity/ai-cybersecurity-toolkit",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution",
+          "name": "AI speed. Human judgment.",
+          "url": "https://www.sophos.com/en-gb/solutions/mdr-security-solutions",
+          "canonical_duplicate_of": "https://www.sophos.com/en-gb/services/managed-detection-and-response"
+        },
+        {
+          "role": "detail",
+          "kind": "solution",
+          "name": "Neutralize cyber threats around the clock",
+          "url": "https://www.sophos.com/en-gb/solutions/neutralize-threats",
+          "canonical_duplicate_of": "https://www.sophos.com/en-gb/solutions/mdr-security-solutions"
+        },
+        {
+          "role": "overview",
+          "kind": "solutions_overview",
+          "name": "Next-Gen Security Solutions for Industries, Use Cases, and Compliance",
+          "url": "https://www.sophos.com/en-gb/solutions",
+          "canonical_duplicate_of": ""
+        }
+      ]
+    },
+    {
+      "path_group": "solutions/compliance",
+      "total_pages": 7,
+      "detail_pages": 7,
+      "pages": [
+        {
+          "role": "detail",
+          "kind": "solution_compliance",
+          "name": "Sophos supports efforts to comply with the CCPA",
+          "url": "https://www.sophos.com/en-gb/solutions/compliance/ccpa",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_compliance",
+          "name": "Easily comply with CIPA requirements with help from Sophos",
+          "url": "https://www.sophos.com/en-gb/solutions/compliance/cipa",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_compliance",
+          "name": "CIS Critical Security Controls are essential for your security",
+          "url": "https://www.sophos.com/en-gb/solutions/compliance/cis-critical-security-controls",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_compliance",
+          "name": "Get help with the EU General Data Protection Regulation (GDPR)",
+          "url": "https://www.sophos.com/en-gb/solutions/compliance/gdpr",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_compliance",
+          "name": "Sophos supports your efforts to fast-track HIPAA compliance",
+          "url": "https://www.sophos.com/en-gb/solutions/compliance/hipaa",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_compliance",
+          "name": "PCI DSS compliance can be a challenge",
+          "url": "https://www.sophos.com/en-gb/solutions/compliance/pci-dss",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_compliance",
+          "name": "SOX compliance is important for your financial data security",
+          "url": "https://www.sophos.com/en-gb/solutions/compliance/sox",
+          "canonical_duplicate_of": ""
+        }
+      ]
+    },
+    {
+      "path_group": "solutions/industries",
+      "total_pages": 8,
+      "detail_pages": 8,
+      "pages": [
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "Cybersecurity as a service for Education",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/education",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "Sophos Protected Classroom",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/education1",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "Trust Sophos to Secure Your Financial Data, Transactions, and Operations",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/finance-and-banking",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "Trust Sophos Cybersecurity for Uninterrupted Delivery of Essential Services by Government Agencies",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/government",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "Trusted cybersecurity for NHS",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/healthcare",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "The World's Most Trusted Cybersecurity for Modern Manufacturing",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/manufacturing",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "End-to-End Cybersecurity for Retailers",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/retail",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_industry",
+          "name": "Cybersecurity as a Service for Federal Government",
+          "url": "https://www.sophos.com/en-gb/solutions/industries/us-federal",
+          "canonical_duplicate_of": ""
+        }
+      ]
+    },
+    {
+      "path_group": "solutions/use-cases",
+      "total_pages": 12,
+      "detail_pages": 12,
+      "pages": [
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Optimize Your Cyber Insurance Position",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/cyber-insurance",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Data Loss Prevention",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/data-protection",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Insider Threat Protection",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/insider-threat-protection",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Sophos and Microsoft: Stronger together for better security",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/microsoft",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Sophos Email for Microsoft 365",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Sophos Email for Microsoft 365",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365-email",
+          "canonical_duplicate_of": "https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365"
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Strengthen your ransomware defenses",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/ransomware-protection",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Strengthen your ransomware defenses",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/ransomware-protection-1",
+          "canonical_duplicate_of": "https://www.sophos.com/en-gb/solutions/use-cases/ransomware-protection"
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Secure your remote workforce",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/remote-working",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Securing Your Supply Chain",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/supply-chain-security",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Threat Prevention",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/threat-prevention",
+          "canonical_duplicate_of": ""
+        },
+        {
+          "role": "detail",
+          "kind": "solution_use_case",
+          "name": "Virtualization",
+          "url": "https://www.sophos.com/en-gb/solutions/use-cases/virtualization",
+          "canonical_duplicate_of": ""
+        }
+      ]
+    }
+  ]
+}

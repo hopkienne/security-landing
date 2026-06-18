@@ -1,13 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'motion/react'
 import { AlertTriangle, ArrowRight, ChevronDown, Globe, Menu } from 'lucide-react'
-import type { MegaMenuData } from './nav-data'
+import type { MegaMenuData, MegaMenuKey, MegaMenuSection } from './nav-data'
 import { vi } from '@/dictionaries/vi'
-import { CTA } from '@/brand/tokens'
 import { cn } from '@/lib/utils'
 import { MobileNav } from './MobileNav'
 import { Logo } from './Logo'
@@ -22,15 +22,45 @@ const NAV: { label: string; href: string }[] = [
 
 export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }) {
   const [scrolled, setScrolled] = useState(false)
-  const [openMega, setOpenMega] = useState(false)
+  const [activeMega, setActiveMega] = useState<MegaMenuKey | null>(null)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const hoverOpenedSection = useRef<MegaMenuKey | null>(null)
   const pathname = usePathname()
+
+  const openMega = activeMega !== null
+  const activeSection = menu.sections.find((section) => section.key === activeMega) ?? null
 
   // Only the home page has the dark video hero behind the header. There the
   // header overlays the video transparently with white text, then flips to the
   // solid white treatment once the user scrolls (or opens the mega menu).
   const isHome = pathname === '/'
   const overHero = isHome && !scrolled && !openMega
+
+  const closeMega = () => {
+    hoverOpenedSection.current = null
+    setActiveMega(null)
+  }
+
+  const openSectionFromHover = (sectionKey: MegaMenuKey) => {
+    setActiveMega((current) => {
+      if (current !== sectionKey) {
+        hoverOpenedSection.current = sectionKey
+      }
+
+      return sectionKey
+    })
+  }
+
+  const toggleSectionFromClick = (sectionKey: MegaMenuKey) => {
+    setActiveMega((current) => {
+      if (hoverOpenedSection.current === sectionKey) {
+        hoverOpenedSection.current = null
+        return sectionKey
+      }
+
+      return current === sectionKey ? null : sectionKey
+    })
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -39,8 +69,19 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeMega()
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
+
   return (
-    <header className="sticky top-0 z-50 w-full" onMouseLeave={() => setOpenMega(false)}>
+    <header className="sticky top-0 z-50 w-full" onMouseLeave={closeMega}>
       {/* Utility bar */}
       <div
         className={cn(
@@ -87,23 +128,31 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
           <Logo tone={overHero ? 'dark' : 'light'} />
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Điều hướng chính">
-            <button
-              type="button"
-              className={cn(
-                'inline-flex items-center gap-1 rounded-md px-3 py-2 text-[15px] font-semibold transition-colors',
-                overHero ? 'text-white/90 hover:text-white' : 'text-ink hover:text-primary',
-                openMega && 'text-primary',
-              )}
-              onMouseEnter={() => setOpenMega(true)}
-              onClick={() => setOpenMega((v) => !v)}
-              aria-expanded={openMega}
-            >
-              {vi.nav.productsSolutions}
-              <ChevronDown
-                className={cn('h-4 w-4 transition-transform', openMega && 'rotate-180')}
-              />
-            </button>
+          <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Điều hướng chính">
+            {menu.sections.map((section) => {
+              const active = activeMega === section.key
+
+              return (
+                <button
+                  key={section.key}
+                  type="button"
+                  className={cn(
+                    'inline-flex items-center gap-1 rounded-md px-2.5 py-2 text-[15px] font-semibold transition-colors',
+                    overHero ? 'text-white/90 hover:text-white' : 'text-ink hover:text-primary',
+                    active && 'text-primary',
+                  )}
+                  onMouseEnter={() => openSectionFromHover(section.key)}
+                  onClick={() => toggleSectionFromClick(section.key)}
+                  aria-expanded={active}
+                  aria-controls="secureops-mega-menu"
+                >
+                  {section.label}
+                  <ChevronDown
+                    className={cn('h-4 w-4 transition-transform', active && 'rotate-180')}
+                  />
+                </button>
+              )
+            })}
             {NAV.map((item) => (
               <Link
                 key={item.href}
@@ -112,7 +161,7 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
                   'rounded-md px-3 py-2 text-[15px] font-medium transition-colors',
                   overHero ? 'text-white/90 hover:text-white' : 'text-ink hover:text-primary',
                 )}
-                onMouseEnter={() => setOpenMega(false)}
+                onMouseEnter={closeMega}
               >
                 {item.label}
               </Link>
@@ -120,17 +169,10 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link
-              href={vi.routes.contact}
-              className="group hidden items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-[0_8px_20px_-8px_rgba(32,6,247,0.6)] transition-all hover:-translate-y-0.5 hover:bg-primary-dark sm:inline-flex"
-            >
-              {CTA.primary}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
             <button
               type="button"
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-md lg:hidden',
+                'inline-flex h-10 w-10 items-center justify-center rounded-md xl:hidden',
                 overHero ? 'text-white' : 'text-ink',
               )}
               onClick={() => setMobileOpen(true)}
@@ -144,62 +186,18 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
 
       {/* Desktop mega menu */}
       <AnimatePresence>
-        {openMega && (
+        {activeSection && (
           <motion.div
+            key={activeSection.key}
+            id="secureops-mega-menu"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="absolute inset-x-0 top-full hidden border-b border-border-soft bg-white shadow-xl lg:block"
-            onMouseEnter={() => setOpenMega(true)}
+            className="absolute inset-x-0 top-full hidden border-b border-border-soft bg-white shadow-xl xl:block"
+            onMouseEnter={() => openSectionFromHover(activeSection.key)}
           >
-            <div className="mx-auto grid w-full max-w-7xl grid-cols-12 gap-8 px-8 py-8">
-              <MegaColumn
-                title={vi.nav.products}
-                viewAllHref={vi.routes.products}
-                groups={menu.productGroups}
-                accent="primary"
-                onNavigate={() => setOpenMega(false)}
-              />
-              <MegaColumn
-                title={vi.nav.solutions}
-                viewAllHref={vi.routes.solutions}
-                groups={menu.solutionGroups}
-                accent="accent"
-                onNavigate={() => setOpenMega(false)}
-              />
-              <div className="col-span-3">
-                <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-[var(--radius-brand-lg)] bg-navy p-6 text-white">
-                  <div className="bg-dotgrid absolute inset-0 opacity-60" aria-hidden />
-                  <div
-                    className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/40 blur-2xl"
-                    aria-hidden
-                  />
-                  <div className="relative">
-                    <p className="text-lg font-bold">Bạn cần tư vấn bảo mật?</p>
-                    <p className="mt-2 text-sm text-white/75">
-                      Đội ngũ chuyên gia SecureOps sẵn sàng đồng hành cùng doanh nghiệp của bạn.
-                    </p>
-                  </div>
-                  <div className="relative mt-6 flex flex-col gap-2">
-                    <Link
-                      href={vi.routes.contact}
-                      onClick={() => setOpenMega(false)}
-                      className="rounded-full bg-primary px-4 py-2.5 text-center text-sm font-bold text-white transition-colors hover:bg-primary-dark"
-                    >
-                      {CTA.primary}
-                    </Link>
-                    <Link
-                      href={vi.routes.products}
-                      onClick={() => setOpenMega(false)}
-                      className="rounded-full border border-white/30 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
-                    >
-                      {CTA.secondaryProducts}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <MegaPanel section={activeSection} onNavigate={closeMega} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -209,58 +207,114 @@ export function HeaderClient({ menu }: { menu: MegaMenuData; brandName: string }
   )
 }
 
-function MegaColumn({
-  title,
-  viewAllHref,
-  groups,
-  accent,
+function MegaPanel({
+  section,
   onNavigate,
 }: {
-  title: string
-  viewAllHref: string
-  groups: MegaMenuData['productGroups']
-  accent: 'primary' | 'accent'
+  section: MegaMenuSection
   onNavigate: () => void
 }) {
   return (
-    <div className="col-span-4">
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-slate">{title}</h3>
+    <div className="mx-auto grid w-full max-w-7xl grid-cols-12 gap-8 px-8 py-8">
+      <div className="col-span-3">
+        <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate">
+          {section.eyebrow}
+        </p>
+        <h3 className="mt-3 text-xl font-extrabold leading-tight text-ink">{section.heading}</h3>
+        <p className="mt-3 text-sm leading-6 text-slate">{section.description}</p>
         <Link
-          href={viewAllHref}
+          href={section.overviewHref}
           onClick={onNavigate}
-          className={cn(
-            'inline-flex items-center gap-1 text-xs font-bold',
-            accent === 'primary' ? 'text-primary' : 'text-sky',
-          )}
+          className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-primary transition-colors hover:text-primary-dark"
         >
-          {vi.cta.viewAll} <ArrowRight className="h-3 w-3" />
+          {vi.cta.overview}
+          <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </div>
-      {groups.length === 0 ? (
-        <p className="text-sm text-slate">Đang cập nhật nội dung.</p>
-      ) : (
-        <div className="grid max-h-80 grid-cols-1 gap-x-6 gap-y-4 overflow-y-auto pr-2">
-          {groups.map((group) => (
-            <div key={group.label}>
-              <p className="mb-1.5 text-xs font-bold text-ink">{group.label}</p>
-              <ul className="space-y-0.5">
-                {group.links.slice(0, 6).map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={onNavigate}
-                      className="block rounded px-1 py-1 text-sm text-slate transition-colors hover:bg-bg-soft hover:text-primary"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
+
+      <div className="col-span-6">
+        {section.groups.length === 0 ? (
+          <p className="rounded-md bg-bg-soft px-4 py-3 text-sm text-slate">
+            Đang cập nhật nội dung.
+          </p>
+        ) : (
+          <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+            {section.groups.map((group) => (
+              <div key={group.label}>
+                <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-ink">
+                  {group.label}
+                </p>
+                <ul className="space-y-1">
+                  {group.links.slice(0, 5).map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={onNavigate}
+                        className="block rounded px-2 py-1.5 text-sm leading-5 text-slate transition-colors hover:bg-bg-soft hover:text-primary"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="col-span-3">
+        <MegaCtaCard section={section} onNavigate={onNavigate} />
+      </div>
+    </div>
+  )
+}
+
+function MegaCtaCard({
+  section,
+  onNavigate,
+}: {
+  section: MegaMenuSection
+  onNavigate: () => void
+}) {
+  return (
+    <div className="relative flex h-full min-h-72 flex-col justify-between overflow-hidden rounded-[var(--radius-brand-lg)] bg-navy text-white">
+      <div className="bg-dotgrid absolute inset-0 opacity-50" aria-hidden />
+      <div className="relative h-32 overflow-hidden">
+        <Image
+          src={section.cta.imageSrc}
+          alt={section.cta.imageAlt}
+          fill
+          sizes="280px"
+          className="object-cover opacity-90"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-navy/5 via-navy/20 to-navy"
+          aria-hidden
+        />
+      </div>
+      <div className="relative px-6 pt-4">
+        <p className="text-lg font-bold leading-tight">{section.cta.heading}</p>
+        <p className="mt-2 text-sm leading-6 text-white/75">{section.cta.body}</p>
+      </div>
+      <div className="relative mt-5 flex flex-col gap-2 px-6 pb-6">
+        <Link
+          href={section.cta.primary.href}
+          onClick={onNavigate}
+          className="rounded-full bg-primary px-4 py-2.5 text-center text-sm font-bold text-white transition-colors hover:bg-primary-dark"
+        >
+          {section.cta.primary.label}
+        </Link>
+        {section.cta.secondary && (
+          <Link
+            href={section.cta.secondary.href}
+            onClick={onNavigate}
+            className="rounded-full border border-white/30 px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-white/10"
+          >
+            {section.cta.secondary.label}
+          </Link>
+        )}
+      </div>
     </div>
   )
 }

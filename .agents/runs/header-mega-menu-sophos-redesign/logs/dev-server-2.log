@@ -1,0 +1,142 @@
+
+> secureops@1.0.0 dev
+> next dev --port 3001
+
+   ▲ Next.js 15.4.11
+   - Local:        http://localhost:3001
+   - Network:      http://100.65.254.10:3001
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 2.9s
+ ○ Compiling / ...
+ ✓ Compiled / in 8.2s (1704 modules)
+ ✓ Compiled in 4.4s (631 modules)
+[⣷] Pulling schema from database...
+[2K[1G[⣯] Pulling schema from database...
+[2K[1G[⣟] Pulling schema from database...
+[2K[1G[⡿] Pulling schema from database...
+[2K[1G[⢿] Pulling schema from database...
+[2K[1G[⣻] Pulling schema from database...
+[2K[1G[⣽] Pulling schema from database...
+[2K[1G[⣷] Pulling schema from database...
+[2K[1G[⣯] Pulling schema from database...
+[2K[1G[⣟] Pulling schema from database...
+[2K[1G[⡿] Pulling schema from database...
+[2K[1G[⢿] Pulling schema from database...
+[2K[1G[⣻] Pulling schema from database...
+[2K[1G[✓] Pulling schema from database...
+[20:43:12] [33mWARN[39m: [36mNo email adapter provided. Email will be written to console. More info at https://payloadcms.com/docs/email/overview.[39m
+ GET / 200 in 17387ms
+ ✓ Compiled in 2.5s (631 modules)
+ ✓ Compiled in 503ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 541ms
+ ✓ Compiled in 557ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 667ms
+ ✓ Compiled in 403ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 490ms
+ ✓ Compiled in 250ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 462ms
+ ✓ Compiled in 375ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 561ms
+ ✓ Compiled in 329ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 540ms
+ ✓ Compiled in 333ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 445ms
+ ✓ Compiled in 443ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 584ms
+ ✓ Compiled in 338ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 650ms
+ ✓ Compiled in 317ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 537ms
+ ✓ Compiled in 436ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 476ms
+ ✓ Compiled in 342ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 622ms
+ ✓ Compiled in 379ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 905ms
+ ✓ Compiled in 291ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 580ms
+ ✓ Compiled in 492ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 776ms
+ ✓ Compiled in 421ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 597ms
+ ✓ Compiled in 370ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 599ms
+ ✓ Compiled in 299ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 459ms
+ ✓ Compiled in 463ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 651ms
+ ✓ Compiled in 504ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 551ms
+ ✓ Compiled in 538ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 622ms
+ ✓ Compiled in 329ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 542ms
+ ✓ Compiled in 305ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 504ms
+ ✓ Compiled in 318ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 1241ms
+ GET / 200 in 2007ms
+ ✓ Compiled in 653ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 753ms
+ ✓ Compiled in 355ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 598ms
+ ✓ Compiled in 407ms (631 modules)
+Generating import map
+No new imports found, skipping writing import map
+ GET / 200 in 825ms
+ ✓ Compiled in 447ms (631 modules)
+[?25h

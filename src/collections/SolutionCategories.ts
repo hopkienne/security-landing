@@ -36,5 +36,25 @@ export const SolutionCategories: CollectionConfig = {
     { name: 'description', type: 'textarea', label: 'Mô tả' },
     sortOrderField,
     statusField,
+    {
+      name: 'catalogManaged',
+      type: 'checkbox',
+      defaultValue: false,
+      index: true,
+      label: 'Catalog managed',
+      admin: { position: 'sidebar', readOnly: true },
+    },
+    {
+      name: 'catalogSource',
+      type: 'text',
+      label: 'Catalog source',
+      admin: { position: 'sidebar', readOnly: true },
+    },
+    {
+      name: 'catalogSourcePath',
+      type: 'textarea',
+      label: 'Catalog source path',
+      admin: { position: 'sidebar', readOnly: true },
+    },
   ],
 }

@@ -202,6 +202,47 @@ h3 {
   text-underline-offset: 2px;
 }
 
+.article-prose {
+  max-width: 72ch;
+}
+.article-prose :where(h2) {
+  font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
+  line-height: 1.2;
+  margin: 2.4rem 0 0.85rem;
+  letter-spacing: -0.02em;
+}
+.article-prose :where(h3) {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  margin: 1.8rem 0 0.7rem;
+  letter-spacing: -0.01em;
+}
+.article-prose :where(p) {
+  color: #334155;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  margin: 1rem 0;
+}
+.article-prose :where(p:first-child) {
+  margin-top: 0;
+}
+.article-prose :where(ul, ol) {
+  color: #334155;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  margin: 1rem 0;
+}
+.article-prose :where(li + li) {
+  margin-top: 0.45rem;
+}
+.article-prose :where(blockquote) {
+  margin: 1.8rem 0;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 1.25rem;
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
 /* Hero card focus: keep the active card crisp and quiet the siblings. */
 .hero-feature-card {
   will-change: background-color, transform;

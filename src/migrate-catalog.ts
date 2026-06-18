@@ -4,31 +4,80 @@ import type { Payload } from 'payload'
 import config from './payload.config'
 import { richText } from './lib/lexical'
 import {
+  legacyProductCategorySlugMappings,
+  legacyProductSlugMappings,
+  legacySolutionSlugMappings,
+  getProductDetailSections,
+  getSolutionDetailSections,
   productCategories,
   products,
   solutionCategories,
   solutions,
+  type CatalogProduct,
+  type CatalogProductCategory,
+  type CatalogSolution,
+  type CatalogSolutionCategory,
+  type LegacyCatalogSlugMapping,
+  type CatalogDetailSection,
 } from './data/catalog-vi'
 
-/**
- * Nạp danh mục sản phẩm & giải pháp (đã làm sạch + dịch tiếng Việt) vào Payload.
- *
- * Nguồn dữ liệu: src/data/catalog-vi.ts (biên dịch từ data/sophos_crawl).
- * Idempotent: upsert theo slug. Mặc định bỏ qua bản ghi đã tồn tại để không ghi đè
- * chỉnh sửa của admin; chạy với --force để ghi đè.
- *
- *   pnpm tsx src/migrate-catalog.ts            # tạo mới, bỏ qua nếu đã có
- *   pnpm tsx src/migrate-catalog.ts --force    # ghi đè dữ liệu cũ
- */
-
 const FORCE = process.argv.includes('--force')
+const DRY_RUN = process.argv.includes('--dry-run')
+const ADOPT_EXISTING = process.argv.includes('--adopt-existing')
+const CATALOG_SOURCE = 'sophos-catalog-research'
+
+type CatalogCollection = Parameters<Payload['find']>[0]['collection']
+
+type ExistingCatalogDoc = {
+  id: number | string
+  catalogManaged?: boolean | null
+  status?: string | null
+}
+
+type Summary = {
+  created: number
+  updated: number
+  adopted: number
+  retired: number
+  skipped: number
+  blocked: string[]
+  missingCategories: string[]
+}
+
+const summary: Summary = {
+  created: 0,
+  updated: 0,
+  adopted: 0,
+  retired: 0,
+  skipped: 0,
+  blocked: [],
+  missingCategories: [],
+}
+
+let dryRunId = -1
+
+function sourcePath(record: { sourcePaths?: string[]; dedupedSourcePaths?: string[] }) {
+  return [...(record.sourcePaths ?? []), ...(record.dedupedSourcePaths ?? [])].join('\n')
+}
+
+function withCatalogMetadata(
+  data: Record<string, unknown>,
+  record: { sourcePaths?: string[]; dedupedSourcePaths?: string[] } = {},
+) {
+  return {
+    ...data,
+    catalogManaged: true,
+    catalogSource: CATALOG_SOURCE,
+    catalogSourcePath: sourcePath(record),
+  }
+}
 
 async function upsert(
   payload: Payload,
-  collection: Parameters<Payload['find']>[0]['collection'],
+  collection: CatalogCollection,
   slug: string,
   data: Record<string, unknown>,
-): Promise<number> {
+): Promise<number | undefined> {
   const existing = await payload.find({
     collection,
     where: { slug: { equals: slug } },
@@ -36,116 +85,313 @@ async function upsert(
     overrideAccess: true,
   })
 
-  if (existing.docs[0]) {
-    const id = existing.docs[0].id as number
-    if (FORCE) {
-      await payload.update({ collection, id, data, overrideAccess: true })
-      console.log(`  ~ cập nhật ${collection}/${slug}`)
-    } else {
-      console.log(`  = bỏ qua ${collection}/${slug} (đã tồn tại)`)
+  const doc = existing.docs[0] as ExistingCatalogDoc | undefined
+  const label = `${collection}/${slug}`
+
+  if (doc) {
+    const id = Number(doc.id)
+    if (!FORCE) {
+      summary.skipped += 1
+      console.log(`  = skip ${label} (exists)`)
+      return id
     }
+
+    if (doc.catalogManaged !== true && !ADOPT_EXISTING) {
+      const message = `${label} exists but is not catalogManaged; refusing --force update`
+      summary.blocked.push(message)
+      console.log(`  ! blocked ${message}`)
+      return id
+    }
+
+    if (doc.catalogManaged !== true && ADOPT_EXISTING) {
+      summary.adopted += 1
+      summary.updated += 1
+      if (DRY_RUN) {
+        console.log(`  ~ would adopt and update ${label}`)
+        return id
+      }
+
+      await payload.update({ collection, id, data, overrideAccess: true })
+      console.log(`  ~ adopted and updated ${label}`)
+      return id
+    }
+
+    summary.updated += 1
+    if (DRY_RUN) {
+      console.log(`  ~ would update ${label}`)
+      return id
+    }
+
+    await payload.update({ collection, id, data, overrideAccess: true })
+    console.log(`  ~ updated ${label}`)
+    return id
+  }
+
+  summary.created += 1
+  if (DRY_RUN) {
+    const id = dryRunId
+    dryRunId -= 1
+    console.log(`  + would create ${label}`)
     return id
   }
 
   const created = await payload.create({ collection, data, overrideAccess: true })
-  console.log(`  + tạo mới ${collection}/${slug}`)
-  return created.id as number
+  console.log(`  + created ${label}`)
+  return Number(created.id)
+}
+
+function categoryMissing(kind: 'product' | 'solution', slug: string, categorySlug: string) {
+  const message = `${kind}/${slug} references missing category "${categorySlug}"`
+  summary.missingCategories.push(message)
+  console.warn(`  ! ${message}`)
+}
+
+function legacySourcePath(mapping: LegacyCatalogSlugMapping) {
+  return [
+    `legacy-slug:${mapping.legacySlug}`,
+    `canonical-slug:${mapping.canonicalSlug}`,
+    `reason:${mapping.reason}`,
+  ].join('\n')
+}
+
+async function retireLegacySlug(
+  payload: Payload,
+  collection: CatalogCollection,
+  mapping: LegacyCatalogSlugMapping,
+) {
+  const legacy = await payload.find({
+    collection,
+    where: { slug: { equals: mapping.legacySlug } },
+    limit: 1,
+    overrideAccess: true,
+  })
+
+  const legacyDoc = legacy.docs[0] as ExistingCatalogDoc | undefined
+  const legacyLabel = `${collection}/${mapping.legacySlug}`
+  const canonicalLabel = `${collection}/${mapping.canonicalSlug}`
+
+  if (!legacyDoc) {
+    console.log(`  = legacy missing ${legacyLabel} -> ${canonicalLabel}`)
+    return
+  }
+
+  const canonical = await payload.find({
+    collection,
+    where: { slug: { equals: mapping.canonicalSlug } },
+    limit: 1,
+    overrideAccess: true,
+  })
+
+  if (!canonical.docs[0] && !DRY_RUN) {
+    const message = `${legacyLabel} cannot retire because ${canonicalLabel} is missing`
+    summary.blocked.push(message)
+    console.log(`  ! blocked ${message}`)
+    return
+  }
+
+  if (legacyDoc.status === 'draft' && legacyDoc.catalogManaged === true) {
+    console.log(`  = legacy already retired ${legacyLabel} -> ${canonicalLabel}`)
+    return
+  }
+
+  summary.retired += 1
+  if (DRY_RUN) {
+    console.log(`  - would retire legacy ${legacyLabel} -> ${canonicalLabel}`)
+    return
+  }
+
+  await payload.update({
+    collection,
+    id: Number(legacyDoc.id),
+    data: {
+      status: 'draft',
+      catalogManaged: true,
+      catalogSource: CATALOG_SOURCE,
+      catalogSourcePath: legacySourcePath(mapping),
+    },
+    overrideAccess: true,
+  })
+  console.log(`  - retired legacy ${legacyLabel} -> ${canonicalLabel}`)
+}
+
+async function retireLegacySlugs(payload: Payload) {
+  if (!FORCE || !ADOPT_EXISTING) return
+
+  console.log('\nLegacy slug retirements')
+  for (const mapping of legacyProductCategorySlugMappings) {
+    await retireLegacySlug(payload, 'product-categories', mapping)
+  }
+  for (const mapping of legacyProductSlugMappings) {
+    await retireLegacySlug(payload, 'products', mapping)
+  }
+  for (const mapping of legacySolutionSlugMappings) {
+    await retireLegacySlug(payload, 'solutions', mapping)
+  }
+}
+
+function productCategoryData(category: CatalogProductCategory) {
+  return withCatalogMetadata(
+    {
+      name: category.name,
+      slug: category.slug,
+      description: category.description,
+      sortOrder: category.sortOrder,
+      status: 'published',
+    },
+    category,
+  )
+}
+
+function detailSectionData(sections: CatalogDetailSection[]) {
+  return sections.map((section) => ({
+    heading: section.heading,
+    body: richText(section.body),
+    bullets: (section.bullets ?? []).map((item) => ({ item })),
+  }))
+}
+
+function productData(product: CatalogProduct, categoryId: number) {
+  return withCatalogMetadata(
+    {
+      name: product.name,
+      slug: product.slug,
+      category: categoryId,
+      shortDescription: product.shortDescription,
+      overview: richText(product.overview),
+      keyPoints: product.keyPoints.map((item) => ({ item })),
+      features: product.features.map((item) => ({ item })),
+      benefits: product.benefits.map((item) => ({ item })),
+      detailSections: detailSectionData(getProductDetailSections(product)),
+      ctas: [{ label: 'Liên hệ tư vấn', href: '/lien-he' }],
+      sortOrder: product.sortOrder,
+      status: 'published',
+    },
+    product,
+  )
+}
+
+function solutionCategoryData(category: CatalogSolutionCategory) {
+  return withCatalogMetadata(
+    {
+      name: category.name,
+      slug: category.slug,
+      type: category.type,
+      description: category.description,
+      sortOrder: category.sortOrder,
+      status: 'published',
+    },
+    category,
+  )
+}
+
+function solutionData(solution: CatalogSolution, categoryId: number) {
+  return withCatalogMetadata(
+    {
+      name: solution.name,
+      slug: solution.slug,
+      category: categoryId,
+      shortDescription: solution.shortDescription,
+      overview: richText(solution.overview),
+      painPoints: solution.painPoints.map((item) => ({ item })),
+      benefits: solution.benefits.map((item) => ({ item })),
+      detailSections: detailSectionData(getSolutionDetailSections(solution)),
+      ctas: [{ label: 'Liên hệ tư vấn', href: '/lien-he' }],
+      sortOrder: solution.sortOrder,
+      status: 'published',
+    },
+    solution,
+  )
+}
+
+function printSummary() {
+  console.log('\nCatalog migration summary:')
+  console.log(`  created: ${summary.created}`)
+  console.log(`  updated: ${summary.updated}`)
+  console.log(`  adopted: ${summary.adopted}`)
+  console.log(`  retired: ${summary.retired}`)
+  console.log(`  skipped: ${summary.skipped}`)
+  console.log(`  blocked: ${summary.blocked.length}`)
+  console.log(`  missing categories: ${summary.missingCategories.length}`)
+
+  if (summary.blocked.length > 0) {
+    console.log('\nBlocked unsafe collisions:')
+    for (const blocked of summary.blocked) console.log(`  - ${blocked}`)
+  }
+
+  if (summary.missingCategories.length > 0) {
+    console.log('\nMissing category issues:')
+    for (const issue of summary.missingCategories) console.log(`  - ${issue}`)
+  }
 }
 
 async function migrate() {
   const payload = await getPayload({ config })
-  console.log(`\n📦 Nạp danh mục sản phẩm & giải pháp${FORCE ? ' (--force)' : ''}...\n`)
+  console.log(
+    `\nCatalog migration${DRY_RUN ? ' --dry-run' : ''}${FORCE ? ' --force' : ''}${ADOPT_EXISTING ? ' --adopt-existing' : ''}\n`,
+  )
 
-  // 1. Danh mục sản phẩm
-  console.log('📁 Danh mục sản phẩm')
+  if (ADOPT_EXISTING && !FORCE) {
+    summary.blocked.push('--adopt-existing requires --force so adoption is always explicit')
+    printSummary()
+    process.exit(1)
+  }
+
+  console.log('Product categories')
   const productCatIds = new Map<string, number>()
-  for (const cat of productCategories) {
-    const id = await upsert(payload, 'product-categories', cat.slug, {
-      name: cat.name,
-      slug: cat.slug,
-      description: cat.description,
-      sortOrder: cat.sortOrder,
-      status: 'published',
-    })
-    productCatIds.set(cat.slug, id)
+  for (const category of productCategories) {
+    const id = await upsert(
+      payload,
+      'product-categories',
+      category.slug,
+      productCategoryData(category),
+    )
+    if (id !== undefined) productCatIds.set(category.slug, id)
   }
 
-  // 2. Sản phẩm
-  console.log('\n🛡️  Sản phẩm')
-  for (const p of products) {
-    const categoryId = productCatIds.get(p.categorySlug)
+  console.log('\nProducts')
+  for (const product of products) {
+    const categoryId = productCatIds.get(product.categorySlug)
     if (!categoryId) {
-      console.warn(`  ! Bỏ qua sản phẩm "${p.slug}": không tìm thấy danh mục "${p.categorySlug}"`)
+      categoryMissing('product', product.slug, product.categorySlug)
       continue
     }
-    await upsert(payload, 'products', p.slug, {
-      name: p.name,
-      slug: p.slug,
-      category: categoryId,
-      shortDescription: p.shortDescription,
-      overview: richText(p.overview),
-      keyPoints: p.keyPoints.map((item) => ({ item })),
-      features: p.features.map((item) => ({ item })),
-      benefits: p.benefits.map((item) => ({ item })),
-      ctas: [{ label: 'Liên hệ tư vấn', href: '/lien-he' }],
-      sortOrder: p.sortOrder,
-      status: 'published',
-    })
+    await upsert(payload, 'products', product.slug, productData(product, categoryId))
   }
 
-  // 3. Nhóm giải pháp
-  console.log('\n📁 Nhóm giải pháp')
+  console.log('\nSolution categories')
   const solutionCatIds = new Map<string, number>()
-  for (const cat of solutionCategories) {
-    const id = await upsert(payload, 'solution-categories', cat.slug, {
-      name: cat.name,
-      slug: cat.slug,
-      type: cat.type,
-      description: cat.description,
-      sortOrder: cat.sortOrder,
-      status: 'published',
-    })
-    solutionCatIds.set(cat.slug, id)
+  for (const category of solutionCategories) {
+    const id = await upsert(
+      payload,
+      'solution-categories',
+      category.slug,
+      solutionCategoryData(category),
+    )
+    if (id !== undefined) solutionCatIds.set(category.slug, id)
   }
 
-  // 4. Giải pháp
-  console.log('\n🎯 Giải pháp')
-  for (const s of solutions) {
-    const categoryId = solutionCatIds.get(s.categorySlug)
+  console.log('\nSolutions')
+  for (const solution of solutions) {
+    const categoryId = solutionCatIds.get(solution.categorySlug)
     if (!categoryId) {
-      console.warn(`  ! Bỏ qua giải pháp "${s.slug}": không tìm thấy nhóm "${s.categorySlug}"`)
+      categoryMissing('solution', solution.slug, solution.categorySlug)
       continue
     }
-    await upsert(payload, 'solutions', s.slug, {
-      name: s.name,
-      slug: s.slug,
-      category: categoryId,
-      shortDescription: s.shortDescription,
-      overview: richText(s.overview),
-      painPoints: s.painPoints.map((item) => ({ item })),
-      benefits: s.benefits.map((item) => ({ item })),
-      ctas: [{ label: 'Liên hệ tư vấn', href: '/lien-he' }],
-      sortOrder: s.sortOrder,
-      status: 'published',
-    })
+    await upsert(payload, 'solutions', solution.slug, solutionData(solution, categoryId))
   }
 
-  // Tổng kết
-  const [pc, pr, sc, so] = await Promise.all([
-    payload.count({ collection: 'product-categories', overrideAccess: true }),
-    payload.count({ collection: 'products', overrideAccess: true }),
-    payload.count({ collection: 'solution-categories', overrideAccess: true }),
-    payload.count({ collection: 'solutions', overrideAccess: true }),
-  ])
-  console.log('\n✅ Hoàn tất. Tổng số bản ghi trong DB:')
-  console.log(`   - Danh mục sản phẩm: ${pc.totalDocs}`)
-  console.log(`   - Sản phẩm:          ${pr.totalDocs}`)
-  console.log(`   - Nhóm giải pháp:    ${sc.totalDocs}`)
-  console.log(`   - Giải pháp:         ${so.totalDocs}\n`)
+  await retireLegacySlugs(payload)
+
+  printSummary()
+
+  if (summary.blocked.length > 0 || summary.missingCategories.length > 0) {
+    process.exit(1)
+  }
+
   process.exit(0)
 }
 
 migrate().catch((err) => {
-  console.error('\n❌ Nạp dữ liệu thất bại:', err)
+  console.error('\nCatalog migration failed:', err)
   process.exit(1)
 })
