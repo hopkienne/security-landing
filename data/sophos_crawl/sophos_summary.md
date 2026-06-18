@@ -1,8 +1,8 @@
 # Sophos product, service, and solution crawl
 
 - Source: https://www.sophos.com/en-gb
-- Fetched at: 2026-06-18T14:43:47.880055+00:00
-- Pages crawled: 156
+- Fetched at: 2026-06-18T16:40:48.316006+00:00
+- Pages crawled: 154
 - Note: use this as research; write original public copy.
 
 ## Products Overview
@@ -2112,27 +2112,6 @@
   - Learn how Sophos has been pushing the boundaries of AI for cybersecurity since 2017.
   - A guide to safely and securely harnessing AI to enhance your organization's cybersecurity defenses.
 
-### AI speed. Human judgment.
-- URL: https://www.sophos.com/en-gb/solutions/mdr-security-solutions
-- Role: detail | Path group: solutions
-- Description: Sophos MDR is the world's largest Agentic SOC. Fully managed, 24/7 detection and response for the agentic era. AI resolves 52% of cases in 89 seconds. Sophos Analysts supervise the AI and own every outcome. No caps on incident response.
-- Keywords: MDR, managed detection and response, Sophos MDR, agentic SOC, AI cybersecurity, threat detection, incident response, MDR provider, CrowdStrike alternative, SentinelOne alternative, Arctic Wolf alternative, endpoint detection response, XDR
-- Research notes:
-  - AI handles speed and scale. Humans provide judgment and accountability. Sophos MDR is the world's largest Agentic SOC — AI investigates and responds in seconds, analysts own the outcomes.
-  - of Sophos MDR cases are resolved end-to-end by AI
-  - from alert to automated response
-  - security and IT integrations included. Bring your stack or use ours
-  - Attackers are using AI and automation to move faster across endpoints, cloud, identity, email, and business applications, making threats harder to detect, investigate, and stop with standalone tools.
-  - Attackers use AI to phish, map, script, and move faster across your environment - using legitimate credentials and trusted tools to evade traditional defenses.
-  - Sensitive data now flows through email, files, SaaS applications, and collaboration tools, making it easier for attackers to reach and exfiltrate at speed.
-  - Modern attacks demand AI‑accelerated operations that combine always‑on expertise, deep threat intelligence, and accountable response to hunt, investigate, and stop threats at speed and scale.
-- CTAs:
-  - Speak with an expert: https://www.sophos.com/en-gb/solutions/mdr-security-solutions
-  - Download solution brief: https://assets.sophos.com/X24WTUEQ/at/2t6fh3s65rs3sfprmrs8rf/sophos-managed-detection-and-response-sb.pdf
-  - Download solution brief: https://assets.sophos.com/X24WTUEQ/at/2t6fh3s65rs3sfprmrs8rf/sophos-managed-detection-and-response-sb.pdf
-  - Download solution brief: https://assets.sophos.com/X24WTUEQ/at/2t6fh3s65rs3sfprmrs8rf/sophos-managed-detection-and-response-sb.pdf
-  - Speak with an expert: https://www.sophos.com/en-gb/solutions/mdr-security-solutions
-
 ### AI-powered cyber defenses
 - URL: https://www.sophos.com/en-gb/solutions/ai-cybersecurity
 - Role: detail | Path group: solutions
@@ -2269,48 +2248,6 @@
   - Contact us: https://www.sophos.com/en-gb/solutions/use-cases/remote-working/contact-request
   - Speak with an expert: https://www.sophos.com/en-gb/solutions/use-cases/remote-working/contact-request
 
-### Securing Your Supply Chain
-- URL: https://www.sophos.com/en-gb/solutions/use-cases/supply-chain-security
-- Role: detail | Path group: solutions/use-cases
-- Description: Defend Against Supply Chain Attacks with Sophos. Mitigate the Risk of Phishing Attacks, Potential Third-Party Supplier Vulnerabilities, and Unknown Compromised Software with a Suite of Sophos Security Solutions.
-- Keywords: MDR, cyber, incident, managed, detect, endpoint, firewall, network, email, phishing, next gen, www.sophos.com
-- Research notes:
-  - Organizations often rely on third-party suppliers to manage business functions such as IT infrastructure. Enabling third-party suppliers to connect to your network introduces vulnerability to supply chain attacks. Adversaries infiltrate third-party suppliers and exploit their trusted access to gain access to your environment. Once they get in, they conduct....
-  - Several high-profile data breach events highlight that supply chain remains a major weak link in the cybersecurity chain of organizations. In late 2020, it was discovered that the supply chain of IT management firm SolarWinds was compromised and adversaries were able to insert malicious code into SolarWinds’ infrastructure monitoring and management platform...
-  - The complexity and nature of supply chain attacks make it difficult for technology alone to defend against them. Following best practice guidelines will help you minimize your risk from supply chain attacks.
-  - Shift from a reactive to a proactive approach to cybersecurity
-  - Monitor for early signs of compromise
-  - Audit your supply chain to identify the weak links
-  - Assess your suppliers' and business partners' security posture
-  - Constantly review your own IT security operations hygiene
-- CTAs:
-  - Contact Us: https://www.sophos.com/en-gb/solutions/contact-us
-  - Download Whitepaper: https://www.sophos.com/en-gb/resources/white-papers/supply-chain-attacks-best-practice
-  - Learn More: https://www.sophos.com/en-gb/products/endpoint-security
-  - Learn More: https://www.sophos.com/en-gb/products/managed-detection-and-response
-  - Learn More: https://www.sophos.com/en-gb/products/zero-trust-network-access
-  - Contact Us: https://www.sophos.com/en-gb/solutions/contact-us
-
-### Sophos Email for Microsoft 365
-- URL: https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365
-- Role: detail | Path group: solutions/use-cases
-- Description: Sophos Email integrates with M365 email in minutes, protecting users faster, and unlocking end-to-end visibility across your full M365 suite with Sophos XDR.
-- Keywords: MDR, cyber, incident, managed, detect, endpoint, firewall, network, email, phishing, next gen, www.sophos.com
-- Research notes:
-  - Sophos Email seamlessly integrates with Microsoft 365 in minutes to enhance and extend native Exchange Online protections, regardless of your licensing tier. Multi-layered AI protection, unmatched threat intelligence, and strong brand and identity detection combine with phishing simulation and user awareness training to elevate defenses against AI-based thr...
-  - Microsoft environments secured by Sophos
-  - Advanced attacked detected by Sophos MDR in Microsoft environments in 2025
-  - Increase in BEC attacks from 2024 to 2025
-  - Stop advanced and AI-generated threats before they reach the inbox with multi-layered AI defenses and threat intelligence that blocks malicious emails pre-delivery.
-  - Reduce your window of exposure with automated post-delivery clawback directly in Microsoft 365 to remove emails identified as malicious as soon as threat intelligence is updated.
-  - Enhance and extend foundational Exchange Online spam and malware protection with advanced email filtering, AI analysis, impersonation protection, DLP, and content control.
-  - Protect users from weaponized links with time-of-click URL scanning that checks links upon click — including malicious URLs hidden in QR codes and images that bypass traditional defenses.
-- CTAs:
-  - Free Trial: https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365
-  - Learn more: https://www.sophos.com/en-gb/products/sophos-email
-  - Download Sophos Email solution brief: https://assets.sophos.com/X24WTUEQ/at/r9qv7kk6jfpgj78vt7qx4q/sophos-email-sb.pdf
-  - Learn more: https://www.sophos.com/en-gb/products/sophos-email
-
 ### Sophos Email for Microsoft 365
 - URL: https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365-email
 - Role: detail | Path group: solutions/use-cases
@@ -2427,6 +2364,10 @@
 - CTAs:
   - Contact Us: https://www.sophos.com/en-gb/solutions/contact-us
   - Contact Us: https://www.sophos.com/en-gb/solutions/contact-us
+
+### https://www.sophos.com/en-gb/solutions/use-cases/supply-chain-security
+- URL: https://www.sophos.com/en-gb/solutions/use-cases/supply-chain-security
+- Role: detail | Path group: solutions/use-cases
 
 ## Solution Industry
 
