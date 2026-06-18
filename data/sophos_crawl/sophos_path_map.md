@@ -10,14 +10,13 @@ Detail pages are the main crawl targets. Group pages are taxonomy or overview pa
 - `detail` `service` - Sophos Managed Risk: https://www.sophos.com/en-gb/services/managed-risk
 - `detail` `service` - Sophos Security Services Retainer: https://www.sophos.com/en-gb/services/security-services-retainer
 
-## solutions (6 detail pages)
+## solutions (5 detail pages)
 
 - `detail` `solution` - Unified cloud security, from edge to workload.: https://www.sophos.com/en-gb/public-cloud
 - `detail` `solution` - AI-powered cyber defenses: https://www.sophos.com/en-gb/solutions/ai-cybersecurity
 - `detail` `solution` - Sophos AI Assistant: https://www.sophos.com/en-gb/solutions/ai-cybersecurity/ai-assistant
 - `detail` `solution` - AI for cybersecurity toolkit: https://www.sophos.com/en-gb/solutions/ai-cybersecurity/ai-cybersecurity-toolkit
-- `detail` `solution` - AI speed. Human judgment.: https://www.sophos.com/en-gb/solutions/mdr-security-solutions (duplicate of https://www.sophos.com/en-gb/services/managed-detection-and-response)
-- `detail` `solution` - Neutralize cyber threats around the clock: https://www.sophos.com/en-gb/solutions/neutralize-threats (duplicate of https://www.sophos.com/en-gb/solutions/mdr-security-solutions)
+- `detail` `solution` - Neutralize cyber threats around the clock: https://www.sophos.com/en-gb/solutions/neutralize-threats
 - `overview` `solutions_overview` - Next-Gen Security Solutions for Industries, Use Cases, and Compliance: https://www.sophos.com/en-gb/solutions
 
 ## solutions/compliance (7 detail pages)
@@ -41,17 +40,16 @@ Detail pages are the main crawl targets. Group pages are taxonomy or overview pa
 - `detail` `solution_industry` - End-to-End Cybersecurity for Retailers: https://www.sophos.com/en-gb/solutions/industries/retail
 - `detail` `solution_industry` - Cybersecurity as a Service for Federal Government: https://www.sophos.com/en-gb/solutions/industries/us-federal
 
-## solutions/use-cases (12 detail pages)
+## solutions/use-cases (11 detail pages)
 
 - `detail` `solution_use_case` - Optimize Your Cyber Insurance Position: https://www.sophos.com/en-gb/solutions/use-cases/cyber-insurance
 - `detail` `solution_use_case` - Data Loss Prevention: https://www.sophos.com/en-gb/solutions/use-cases/data-protection
 - `detail` `solution_use_case` - Insider Threat Protection: https://www.sophos.com/en-gb/solutions/use-cases/insider-threat-protection
 - `detail` `solution_use_case` - Sophos and Microsoft: Stronger together for better security: https://www.sophos.com/en-gb/solutions/use-cases/microsoft
-- `detail` `solution_use_case` - Sophos Email for Microsoft 365: https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365
-- `detail` `solution_use_case` - Sophos Email for Microsoft 365: https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365-email (duplicate of https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365)
+- `detail` `solution_use_case` - Sophos Email for Microsoft 365: https://www.sophos.com/en-gb/solutions/use-cases/microsoft-365-email
 - `detail` `solution_use_case` - Strengthen your ransomware defenses: https://www.sophos.com/en-gb/solutions/use-cases/ransomware-protection
-- `detail` `solution_use_case` - Strengthen your ransomware defenses: https://www.sophos.com/en-gb/solutions/use-cases/ransomware-protection-1 (duplicate of https://www.sophos.com/en-gb/solutions/use-cases/ransomware-protection)
+- `detail` `solution_use_case` - Strengthen your ransomware defenses: https://www.sophos.com/en-gb/solutions/use-cases/ransomware-protection-1
 - `detail` `solution_use_case` - Secure your remote workforce: https://www.sophos.com/en-gb/solutions/use-cases/remote-working
-- `detail` `solution_use_case` - Securing Your Supply Chain: https://www.sophos.com/en-gb/solutions/use-cases/supply-chain-security
+- `detail` `solution_use_case` - https://www.sophos.com/en-gb/solutions/use-cases/supply-chain-security: https://www.sophos.com/en-gb/solutions/use-cases/supply-chain-security
 - `detail` `solution_use_case` - Threat Prevention: https://www.sophos.com/en-gb/solutions/use-cases/threat-prevention
 - `detail` `solution_use_case` - Virtualization: https://www.sophos.com/en-gb/solutions/use-cases/virtualization
