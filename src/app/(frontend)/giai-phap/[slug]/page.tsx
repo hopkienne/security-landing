@@ -14,7 +14,7 @@ import { buildMetadata, SITE_URL } from '@/lib/seo'
 import { serviceJsonLd, breadcrumbJsonLd } from '@/lib/jsonld'
 import { mediaUrl } from '@/lib/utils'
 import { vi } from '@/dictionaries/vi'
-import type { Product } from '@/payload-types'
+import type { Product, Solution } from '@/payload-types'
 
 export async function generateStaticParams() {
   const solutions = await getSolutions()
@@ -118,6 +118,7 @@ export default async function SolutionDetailPage({
                 </ul>
               </div>
             )}
+            <DetailSections sections={solution.detailSections ?? []} />
           </div>
 
           <aside>
@@ -141,5 +142,34 @@ export default async function SolutionDetailPage({
 
       <CTASection />
     </>
+  )
+}
+
+function DetailSections({
+  sections,
+}: {
+  sections: NonNullable<Solution['detailSections']>
+}) {
+  if (sections.length === 0) return null
+
+  return (
+    <div className="mt-12 space-y-10 border-t border-border-soft pt-10">
+      {sections.map((section) => (
+        <section key={section.id ?? section.heading} className="space-y-4">
+          <h2 className="text-2xl font-semibold tracking-tight text-ink">{section.heading}</h2>
+          <RichText data={section.body} />
+          {section.bullets && section.bullets.length > 0 && (
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {section.bullets.map((bullet) => (
+                <li key={bullet.id ?? bullet.item} className="flex items-start gap-2 text-sm text-slate">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>{bullet.item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
   )
 }

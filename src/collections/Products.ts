@@ -3,7 +3,7 @@ import { adminsOnly, publishedOrAdmin } from '@/access'
 import { slugField } from '@/fields/slug'
 import { statusField, sortOrderField } from '@/fields/status'
 import { seoField } from '@/fields/seo'
-import { ctasField, bulletArray } from '@/fields/common'
+import { ctasField, bulletArray, detailSectionsField } from '@/fields/common'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -43,6 +43,7 @@ export const Products: CollectionConfig = {
             bulletArray('keyPoints', 'Điểm nổi bật'),
             bulletArray('features', 'Tính năng'),
             bulletArray('benefits', 'Lợi ích'),
+            detailSectionsField,
             ctasField,
           ],
         },
@@ -80,6 +81,26 @@ export const Products: CollectionConfig = {
     },
     sortOrderField,
     statusField,
+    {
+      name: 'catalogManaged',
+      type: 'checkbox',
+      defaultValue: false,
+      index: true,
+      label: 'Catalog managed',
+      admin: { position: 'sidebar', readOnly: true },
+    },
+    {
+      name: 'catalogSource',
+      type: 'text',
+      label: 'Catalog source',
+      admin: { position: 'sidebar', readOnly: true },
+    },
+    {
+      name: 'catalogSourcePath',
+      type: 'textarea',
+      label: 'Catalog source path',
+      admin: { position: 'sidebar', readOnly: true },
+    },
     slugField('name'),
   ],
 }

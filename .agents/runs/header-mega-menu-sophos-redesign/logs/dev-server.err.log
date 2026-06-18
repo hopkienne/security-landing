@@ -1,0 +1,39 @@
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\9.pack.gz_' -> 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\9.pack.gz'
+ ⨯ Failed to generate static paths for /giai-phap/[slug]:
+TypeError: __webpack_modules__[moduleId] is not a function
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:10:73)
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:1:21)
+    at <unknown> (rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx (D:\Personal_Folder\security-landing\.next\server\app\(frontend)\giai-phap\[slug]\page.js:74:1) {
+  type: 'TypeError'
+}
+ ⨯ Failed to generate static paths for /giai-phap/[slug]:
+TypeError: __webpack_modules__[moduleId] is not a function
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:10:73)
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:1:21)
+    at <unknown> (rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx (D:\Personal_Folder\security-landing\.next\server\app\(frontend)\giai-phap\[slug]\page.js:74:1) {
+  type: 'TypeError'
+}
+ ⨯ Failed to generate static paths for /giai-phap/[slug]:
+TypeError: __webpack_modules__[moduleId] is not a function
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:10:73)
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:1:21)
+    at <unknown> (rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx (D:\Personal_Folder\security-landing\.next\server\app\(frontend)\giai-phap\[slug]\page.js:74:1) {
+  type: 'TypeError'
+}
+ ⨯ Failed to generate static paths for /giai-phap/[slug]:
+TypeError: __webpack_modules__[moduleId] is not a function
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:10:73)
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:1:21)
+    at <unknown> (rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx (D:\Personal_Folder\security-landing\.next\server\app\(frontend)\giai-phap\[slug]\page.js:74:1) {
+  type: 'TypeError'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\0.pack.gz_' -> 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\0.pack.gz'
+ ⨯ TypeError: __webpack_modules__[moduleId] is not a function
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:10:73)
+    at eval (webpack-internal:///(rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx:1:21)
+    at <unknown> (rsc)/./src/app/(frontend)/giai-phap/[slug]/page.tsx (D:\Personal_Folder\security-landing\.next\server\app\(frontend)\giai-phap\[slug]\page.js:74:1) {
+  type: 'TypeError',
+  page: '/giai-phap/ransomware-protection'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\0.pack.gz_' -> 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\0.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, rename 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\0.pack.gz_' -> 'D:\Personal_Folder\security-landing\.next\cache\webpack\client-development\0.pack.gz'

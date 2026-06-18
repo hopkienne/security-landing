@@ -17,6 +17,7 @@ export type CatalogProductCategory = {
   slug: string
   description: string
   sortOrder: number
+  sourcePaths?: string[]
 }
 
 export type CatalogProduct = {
@@ -29,6 +30,9 @@ export type CatalogProduct = {
   benefits: string[]
   overview: string[]
   sortOrder: number
+  sourcePaths?: string[]
+  dedupedSourcePaths?: string[]
+  detailSections?: CatalogDetailSection[]
 }
 
 export type CatalogSolutionCategory = {
@@ -37,6 +41,7 @@ export type CatalogSolutionCategory = {
   type: 'use_case' | 'industry' | 'compliance' | 'general'
   description: string
   sortOrder: number
+  sourcePaths?: string[]
 }
 
 export type CatalogSolution = {
@@ -48,6 +53,345 @@ export type CatalogSolution = {
   benefits: string[]
   overview: string[]
   sortOrder: number
+  sourcePaths?: string[]
+  dedupedSourcePaths?: string[]
+  detailSections?: CatalogDetailSection[]
+}
+
+export type CatalogDetailSection = {
+  heading: string
+  body: string[]
+  bullets?: string[]
+}
+
+export type LegacyCatalogSlugMapping = {
+  legacySlug: string
+  canonicalSlug: string
+  reason: string
+}
+
+export const legacyProductCategorySlugMappings: LegacyCatalogSlugMapping[] = [
+  {
+    legacySlug: 'dich-vu-bao-mat-quan-ly',
+    canonicalSlug: 'managed-security-services',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'bao-ve-diem-cuoi',
+    canonicalSlug: 'endpoint',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'an-ninh-mang-luoi',
+    canonicalSlug: 'network-security',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'bao-mat-dam-may',
+    canonicalSlug: 'cloud-security',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'bao-ve-khong-gian-lam-viec',
+    canonicalSlug: 'workspace-protection',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'dich-vu-tu-van',
+    canonicalSlug: 'advisory-services',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+]
+
+export const legacyProductSlugMappings: LegacyCatalogSlugMapping[] = [
+  {
+    legacySlug: 'phat-hien-va-phan-ung-quan-ly-mdr',
+    canonicalSlug: 'managed-detection-and-response',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'quan-ly-rui-ro',
+    canonicalSlug: 'managed-risk',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'bao-ve-diem-cuoi-endpoint',
+    canonicalSlug: 'endpoint-security',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'phat-hien-phan-ung-diem-cuoi-edr',
+    canonicalSlug: 'edr',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'bao-ve-may-chu',
+    canonicalSlug: 'server-security',
+    reason: 'initial Vietnamese server seed merged into catalog server protection',
+  },
+  {
+    legacySlug: 'tuong-lua-the-he-moi',
+    canonicalSlug: 'next-gen-firewall',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'phat-hien-phan-ung-mang-ndr',
+    canonicalSlug: 'network-detection-and-response',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'bao-mat-khoi-luong-cong-viec-dam-may',
+    canonicalSlug: 'cloud-workload-protection',
+    reason: 'initial Vietnamese cloud workload seed merged into catalog cloud workload protection',
+  },
+  {
+    legacySlug: 'bao-mat-email',
+    canonicalSlug: 'email-security',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'mo-phong-tan-cong-lua-dao',
+    canonicalSlug: 'phishing-training',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'kiem-thu-bao-mat',
+    canonicalSlug: 'security-testing',
+    reason: 'initial Vietnamese security testing seed merged into catalog security testing',
+  },
+  {
+    legacySlug: 'phan-ung-su-co',
+    canonicalSlug: 'incident-response-services',
+    reason: 'initial Vietnamese incident response seed merged into catalog incident response services',
+  },
+]
+
+export const legacySolutionSlugMappings: LegacyCatalogSlugMapping[] = [
+  {
+    legacySlug: 'chong-ransomware',
+    canonicalSlug: 'ransomware-protection',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'bao-ve-moi-truong-microsoft',
+    canonicalSlug: 'microsoft',
+    reason: 'initial Vietnamese Microsoft environment seed merged into catalog Microsoft solution',
+  },
+  {
+    legacySlug: 'bao-ve-luc-luong-lam-viec-tu-xa',
+    canonicalSlug: 'remote-working',
+    reason: 'initial Vietnamese remote workforce seed merged into catalog remote working solution',
+  },
+  {
+    legacySlug: 'chong-thao-lung-du-lieu',
+    canonicalSlug: 'data-protection',
+    reason: 'initial Vietnamese data loss seed merged into catalog data protection solution',
+  },
+  {
+    legacySlug: 'tai-chinh-ngan-hang',
+    canonicalSlug: 'finance-and-banking',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'y-te',
+    canonicalSlug: 'healthcare',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'giao-duc',
+    canonicalSlug: 'education',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'san-xuat',
+    canonicalSlug: 'manufacturing',
+    reason: 'initial Vietnamese seed slug replaced by catalog slug',
+  },
+  {
+    legacySlug: 'tuan-thu-gdpr',
+    canonicalSlug: 'gdpr',
+    reason: 'initial Vietnamese compliance seed merged into catalog GDPR solution',
+  },
+  {
+    legacySlug: 'tuan-thu-pci-dss',
+    canonicalSlug: 'pci-dss',
+    reason: 'initial Vietnamese compliance seed merged into catalog PCI DSS solution',
+  },
+  {
+    legacySlug: 'microsoft-365-email',
+    canonicalSlug: 'microsoft-365',
+    reason: 'crawl duplicate slug merged into canonical Microsoft 365 solution',
+  },
+]
+
+function sourcedRecord(record: { sourcePaths?: string[]; dedupedSourcePaths?: string[] }) {
+  return (record.sourcePaths?.length ?? 0) > 0 || (record.dedupedSourcePaths?.length ?? 0) > 0
+}
+
+function productFallbackDetailSections(product: CatalogProduct): CatalogDetailSection[] {
+  return [
+    {
+      heading: 'Bối cảnh và mục tiêu',
+      body: [product.shortDescription, ...product.overview],
+    },
+    {
+      heading: 'Năng lực nổi bật',
+      body: [
+        `${product.name} được thiết kế để giải quyết các yêu cầu vận hành bảo mật quan trọng, từ phát hiện sớm đến phản ứng và duy trì khả năng kiểm soát.`,
+      ],
+      bullets: product.keyPoints,
+    },
+    {
+      heading: 'Cách SecureOps triển khai',
+      body: [
+        'Khi triển khai, SecureOps tập trung vào phạm vi rủi ro thực tế, khả năng tích hợp với môi trường hiện có và các quy trình có thể vận hành lâu dài.',
+      ],
+      bullets: product.features,
+    },
+    {
+      heading: 'Giá trị cho doanh nghiệp',
+      body: [
+        'Kết quả kỳ vọng là một lớp bảo vệ rõ ràng hơn, ít điểm mù hơn và khả năng phản ứng nhất quán hơn khi có tín hiệu bất thường.',
+      ],
+      bullets: product.benefits,
+    },
+  ]
+}
+
+function solutionFallbackDetailSections(solution: CatalogSolution): CatalogDetailSection[] {
+  return [
+    {
+      heading: 'Bối cảnh rủi ro',
+      body: [solution.shortDescription, ...solution.overview],
+    },
+    {
+      heading: 'Thách thức cần xử lý',
+      body: [
+        `${solution.name} cần một cách tiếp cận có trọng tâm để giảm rủi ro, tránh đầu tư dàn trải và ưu tiên các điểm có tác động lớn nhất đến hoạt động.`,
+      ],
+      bullets: solution.painPoints,
+    },
+    {
+      heading: 'Hướng tiếp cận của SecureOps',
+      body: [
+        'SecureOps kết hợp công nghệ, quy trình vận hành và chuyên gia an ninh mạng để xây dựng lớp phòng thủ phù hợp với bối cảnh của từng tổ chức.',
+      ],
+      bullets: solution.benefits,
+    },
+    {
+      heading: 'Lộ trình triển khai khuyến nghị',
+      body: [
+        'Một chương trình triển khai hiệu quả nên bắt đầu từ kiểm kê phạm vi, xác định rủi ro ưu tiên, kết nối nguồn dữ liệu quan trọng và đo lường cải thiện theo thời gian.',
+      ],
+      bullets: [
+        'Xác định tài sản, người dùng, dữ liệu và luồng truy cập quan trọng.',
+        'Ưu tiên kiểm soát theo mức độ rủi ro và khả năng tác động đến kinh doanh.',
+        'Thiết lập giám sát, phản ứng và báo cáo để duy trì cải thiện liên tục.',
+      ],
+    },
+  ]
+}
+
+const managedDetectionAndResponseDetailSections: CatalogDetailSection[] = [
+  {
+    heading: 'Mối đe dọa tăng tốc bởi AI',
+    body: [
+      'Các chiến dịch tấn công hiện đại tận dụng tự động hóa và AI để tăng tốc trinh sát, tạo nội dung lừa đảo, né tránh phát hiện và di chuyển nhanh hơn qua nhiều lớp phòng thủ.',
+      'Với mô hình MDR, SecureOps giúp doanh nghiệp có một lớp vận hành an ninh luôn hoạt động, không phụ thuộc hoàn toàn vào khả năng phản ứng thủ công của đội ngũ nội bộ.',
+    ],
+    bullets: [
+      'Giảm khoảng trống giữa thời điểm cảnh báo xuất hiện và thời điểm có hành động xử lý.',
+      'Kết hợp phân tích máy với phán đoán của chuyên gia để tránh phản ứng máy móc.',
+      'Tập trung vào dấu hiệu tấn công thực sự thay vì chỉ cộng dồn cảnh báo riêng lẻ.',
+    ],
+  },
+  {
+    heading: 'Agentic SOC: AI xử lý tốc độ, con người giữ quyền kiểm soát',
+    body: [
+      'Dịch vụ MDR được định hướng như một SOC có AI hỗ trợ: AI có thể tóm tắt ngữ cảnh, điều tra bước đầu và đề xuất hành động, còn chuyên gia con người xác nhận hướng xử lý và chịu trách nhiệm kết quả.',
+      'Cách vận hành này đặc biệt hữu ích khi cảnh báo đến từ nhiều nguồn khác nhau như endpoint, email, danh tính, cloud, firewall hoặc công cụ bảo mật sẵn có của khách hàng.',
+    ],
+    bullets: [
+      'Tự động hóa các bước lặp lại trong điều tra để rút ngắn thời gian xử lý.',
+      'Chuyên gia phân tích giữ vai trò đánh giá, ưu tiên và ra quyết định cuối cùng.',
+      'Quy trình phản ứng được kiểm soát để giảm rủi ro hành động sai hoặc thiếu ngữ cảnh.',
+    ],
+  },
+  {
+    heading: 'Phản ứng trong vài giây, điều tra có chiều sâu',
+    body: [
+      'Khi tín hiệu nguy hiểm được xác nhận, đội ngũ MDR có thể cô lập endpoint, chặn tiến trình độc hại, vô hiệu hóa tài khoản rủi ro hoặc đề xuất hành động khắc phục theo mức độ cho phép.',
+      'Sau phản ứng ban đầu, phần điều tra giúp doanh nghiệp hiểu nguyên nhân, phạm vi ảnh hưởng và các bước cần làm để tránh tái diễn.',
+    ],
+    bullets: [
+      'Ưu tiên cảnh báo theo rủi ro thay vì xử lý dàn đều mọi tín hiệu.',
+      'Điều tra chuỗi tấn công từ điểm vào, hành vi di chuyển ngang đến hành động cuối.',
+      'Hỗ trợ containment, remediation và khuyến nghị hardening sau sự cố.',
+      'Theo dõi tái phát để chắc chắn mối đe dọa đã được xử lý đúng mức.',
+    ],
+  },
+  {
+    heading: 'Vendor-agnostic, tận dụng stack hiện có',
+    body: [
+      'Doanh nghiệp không nhất thiết phải thay toàn bộ công cụ bảo mật đang có. MDR có thể tận dụng nhiều nguồn telemetry và công cụ IT/security để tạo bức tranh điều tra thống nhất hơn.',
+      'Cách tiếp cận độc lập với nhà cung cấp giúp giảm chi phí chuyển đổi, đồng thời cho phép đội ngũ SecureOps phối hợp với môi trường thực tế của khách hàng.',
+    ],
+    bullets: [
+      'Khai thác tín hiệu từ endpoint, network, email, identity, cloud và SIEM khi có.',
+      'Cho phép mở rộng từng bước thay vì triển khai một lần quá lớn.',
+      'Tập trung vào kết quả phát hiện và phản ứng, không chỉ vào danh sách công cụ.',
+    ],
+  },
+  {
+    heading: 'Đội ngũ chuyên gia đứng sau dịch vụ',
+    body: [
+      'MDR không chỉ là một lớp công nghệ. Giá trị cốt lõi nằm ở đội ngũ phân tích, threat hunter, kỹ sư tự động hóa và chuyên gia ứng cứu cùng vận hành trên một quy trình thống nhất.',
+      'Nhờ đó, doanh nghiệp có được năng lực SOC chuyên sâu mà không phải tự tuyển dụng, đào tạo và duy trì trực 24/7 từ đầu.',
+    ],
+    bullets: [
+      'Security Analysts phân loại và điều tra cảnh báo có mức độ ưu tiên cao.',
+      'Threat Hunters chủ động tìm dấu hiệu xâm nhập chưa tạo cảnh báo rõ ràng.',
+      'AI and Automation Engineers tối ưu luồng xử lý và giảm thao tác thủ công.',
+      'Incident Responders hỗ trợ khi cần khoanh vùng, loại bỏ và phục hồi sau sự cố.',
+    ],
+  },
+  {
+    heading: 'Mô hình vận hành phù hợp doanh nghiệp',
+    body: [
+      'SecureOps có thể vận hành như phần mở rộng của đội IT/bảo mật hiện có, với quy trình escalation, báo cáo và phạm vi phản ứng được thống nhất trước.',
+      'Điều này giúp doanh nghiệp biết ai chịu trách nhiệm, khi nào cần phê duyệt và hành động nào có thể thực hiện ngay để giảm thời gian chờ.',
+    ],
+    bullets: [
+      'Thiết lập phạm vi giám sát, kênh liên lạc và quy tắc phản ứng ngay từ đầu.',
+      'Báo cáo định kỳ giúp theo dõi xu hướng rủi ro và chất lượng phát hiện.',
+      'Có thể mở rộng dần sang identity, cloud, email hoặc các nguồn dữ liệu mới.',
+    ],
+  },
+  {
+    heading: 'Kết quả kỳ vọng',
+    body: [
+      'Sau khi triển khai, doanh nghiệp có một năng lực phát hiện và phản ứng nhất quán hơn, giảm phụ thuộc vào việc đội nội bộ phải tự xử lý mọi cảnh báo trong mọi thời điểm.',
+      'Mục tiêu không chỉ là chặn sự cố đơn lẻ, mà là nâng dần khả năng nhìn thấy, phản ứng và cải thiện phòng thủ qua từng chu kỳ vận hành.',
+    ],
+    bullets: [
+      'Rút ngắn thời gian phát hiện, điều tra và phản ứng với mối đe dọa.',
+      'Giảm tải cảnh báo và tập trung đội nội bộ vào các quyết định quan trọng.',
+      'Nâng cao khả năng chống chịu trước ransomware, xâm nhập tài khoản và tấn công có chủ đích.',
+    ],
+  },
+]
+
+export function getProductDetailSections(product: CatalogProduct): CatalogDetailSection[] {
+  if (product.detailSections?.length) return product.detailSections
+  if (product.slug === 'managed-detection-and-response') {
+    return managedDetectionAndResponseDetailSections
+  }
+  return sourcedRecord(product) ? productFallbackDetailSections(product) : []
+}
+
+export function getSolutionDetailSections(solution: CatalogSolution): CatalogDetailSection[] {
+  if (solution.detailSections?.length) return solution.detailSections
+  return sourcedRecord(solution) ? solutionFallbackDetailSections(solution) : []
 }
 
 /* ------------------------------------------------------------------ */
@@ -109,6 +453,7 @@ export const products: CatalogProduct[] = [
     name: 'Dịch vụ MDR — Phát hiện & phản ứng được quản lý',
     slug: 'managed-detection-and-response',
     categorySlug: 'managed-security-services',
+    sourcePaths: ['/services/managed-detection-and-response'],
     shortDescription:
       'Dịch vụ phát hiện và phản ứng 24/7 được quản lý hoàn toàn cho kỷ nguyên AI: AI xử lý tốc độ và quy mô, chuyên gia con người đảm bảo phán đoán và trách nhiệm.',
     keyPoints: [
@@ -137,6 +482,7 @@ export const products: CatalogProduct[] = [
     name: 'MDR cho môi trường Microsoft',
     slug: 'mdr-for-microsoft',
     categorySlug: 'managed-security-services',
+    sourcePaths: ['/services/managed-detection-and-response/microsoft'],
     shortDescription:
       'Mở rộng đội ngũ của bạn với các chuyên gia giám sát, điều tra và phản ứng với cảnh báo bảo mật Microsoft 24/7, tích hợp sâu với Microsoft Defender.',
     keyPoints: [
@@ -163,6 +509,7 @@ export const products: CatalogProduct[] = [
     name: 'Quản lý rủi ro chủ động (Managed Risk)',
     slug: 'managed-risk',
     categorySlug: 'managed-security-services',
+    sourcePaths: ['/services/managed-risk'],
     shortDescription:
       'Dịch vụ quản lý lỗ hổng và bề mặt tấn công chủ động: phát hiện, xếp ưu tiên và giám sát các điểm yếu nghiêm trọng trước khi chúng làm gián đoạn doanh nghiệp.',
     keyPoints: [
@@ -184,6 +531,34 @@ export const products: CatalogProduct[] = [
       'SecureOps Managed Risk giúp doanh nghiệp nhìn rõ và kiểm soát bề mặt tấn công của mình, biến việc quản lý lỗ hổng thành một dịch vụ liên tục thay vì một dự án rời rạc.',
     ],
     sortOrder: 3,
+  },
+  {
+    name: 'Gói giữ chỗ dịch vụ bảo mật',
+    slug: 'security-services-retainer',
+    categorySlug: 'managed-security-services',
+    sourcePaths: ['/services/security-services-retainer'],
+    shortDescription:
+      'Gói dịch vụ trả trước giúp doanh nghiệp có sẵn chuyên gia bảo mật khi cần: tư vấn, đánh giá, ứng cứu sự cố và hỗ trợ nâng cấp năng lực phòng thủ.',
+    keyPoints: [
+      'Dự phòng sẵn thời lượng chuyên gia cho các tình huống bảo mật khẩn cấp hoặc theo kế hoạch.',
+      'Linh hoạt dùng cho tư vấn, rà soát cấu hình, điều tra sự cố hoặc củng cố kiểm soát quan trọng.',
+      'Giúp đội ngũ nội bộ có điểm tựa chuyên môn mà không phải khởi động một dự án mới mỗi lần phát sinh nhu cầu.',
+    ],
+    features: [
+      'Quy trình tiếp nhận ưu tiên cho yêu cầu tư vấn và hỗ trợ bảo mật.',
+      'Dịch vụ chuyên gia theo giờ hoặc theo phạm vi đã thống nhất.',
+      'Báo cáo khuyến nghị rõ ràng sau từng đợt hỗ trợ.',
+    ],
+    benefits: [
+      'Rút ngắn thời gian huy động chuyên gia khi xảy ra sự cố hoặc thay đổi lớn.',
+      'Kiểm soát ngân sách tốt hơn với phạm vi dịch vụ đã chuẩn bị trước.',
+      'Duy trì nhịp cải thiện an ninh liên tục thay vì chỉ phản ứng khi có vấn đề.',
+    ],
+    overview: [
+      'Gói giữ chỗ dịch vụ bảo mật của SecureOps phù hợp với các tổ chức muốn có sẵn năng lực chuyên gia để xử lý những nhu cầu phát sinh trong năm, từ tư vấn chiến lược đến rà soát kỹ thuật và hỗ trợ ứng cứu.',
+      'Cách tiếp cận này giúp doanh nghiệp giảm độ trễ khi cần hỗ trợ, đồng thời biến các hoạt động cải thiện an ninh thành một nhịp vận hành có kế hoạch.',
+    ],
+    sortOrder: 4,
   },
   {
     name: 'Dịch vụ ứng cứu sự cố',
@@ -748,6 +1123,7 @@ export const products: CatalogProduct[] = [
     name: 'Dịch vụ kiểm thử bảo mật',
     slug: 'security-testing',
     categorySlug: 'advisory-services',
+    dedupedSourcePaths: ['/services/advisory-services/penetration-testing'],
     shortDescription:
       'Mô phỏng đối thủ thực tế để phát hiện lỗ hổng, kiểm chứng phòng thủ và nâng cao khả năng chống chịu, với kiểm thử xâm nhập và đánh giá do chuyên gia thực hiện.',
     keyPoints: [
@@ -817,6 +1193,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Phòng thủ mạng tăng cường bằng AI',
     slug: 'ai-cybersecurity',
     categorySlug: 'tong-quat',
+    sourcePaths: ['/solutions/ai-cybersecurity'],
     shortDescription:
       'Kết hợp học sâu, AI tạo sinh và chuyên môn con người để mang lại sự bảo vệ vượt trội trước các mối đe dọa mạng.',
     painPoints: [
@@ -834,9 +1211,55 @@ export const solutions: CatalogSolution[] = [
     sortOrder: 1,
   },
   {
+    name: 'Trợ lý AI cho vận hành an ninh',
+    slug: 'ai-assistant',
+    categorySlug: 'tong-quat',
+    sourcePaths: ['/solutions/ai-cybersecurity/ai-assistant'],
+    shortDescription:
+      'Trợ lý AI hỗ trợ chuyên viên an ninh phân tích cảnh báo, tóm tắt ngữ cảnh và đề xuất bước xử lý để rút ngắn thời gian điều tra.',
+    painPoints: [
+      'Chuyên viên phải đọc quá nhiều tín hiệu rời rạc trước khi hiểu mức độ ưu tiên.',
+      'Tri thức điều tra thường nằm phân tán trong công cụ, báo cáo và kinh nghiệm cá nhân.',
+    ],
+    benefits: [
+      'Tóm tắt nhanh bối cảnh sự kiện và các dấu hiệu đáng chú ý.',
+      'Gợi ý hướng điều tra tiếp theo để giảm thao tác thủ công.',
+      'Giúp đội ngũ mới tiếp cận quy trình phản ứng nhất quán hơn.',
+    ],
+    overview: [
+      'Trợ lý AI cho vận hành an ninh của SecureOps được thiết kế như một lớp hỗ trợ ra quyết định, giúp đội ngũ phân tích hiểu nhanh điều gì đang xảy ra và nên kiểm tra điểm nào tiếp theo.',
+      'Thay vì thay thế chuyên gia, trợ lý này gom ngữ cảnh, diễn giải tín hiệu và giúp con người tập trung vào phán đoán quan trọng.',
+    ],
+    sortOrder: 2,
+  },
+  {
+    name: 'Bộ công cụ AI cho an ninh mạng',
+    slug: 'ai-cybersecurity-toolkit',
+    categorySlug: 'tong-quat',
+    sourcePaths: ['/solutions/ai-cybersecurity/ai-cybersecurity-toolkit'],
+    shortDescription:
+      'Bộ công cụ giúp tổ chức đánh giá cách ứng dụng AI vào phòng thủ, kiểm soát rủi ro AI và xây dựng lộ trình vận hành an ninh hiện đại.',
+    painPoints: [
+      'AI mở ra cơ hội lớn nhưng cũng làm tăng tốc độ và quy mô của tấn công.',
+      'Nhiều tổ chức chưa có khung rõ ràng để đưa AI vào quy trình bảo mật một cách có kiểm soát.',
+    ],
+    benefits: [
+      'Xác định các điểm có thể dùng AI để tăng tốc phát hiện và phản ứng.',
+      'Đưa rủi ro AI vào quản trị, chính sách và quy trình vận hành.',
+      'Ưu tiên sáng kiến phù hợp với mức trưởng thành của đội ngũ.',
+    ],
+    overview: [
+      'Bộ công cụ AI cho an ninh mạng của SecureOps giúp doanh nghiệp biến AI thành năng lực phòng thủ có kiểm soát, từ đánh giá hiện trạng đến lựa chọn ưu tiên triển khai.',
+      'Trọng tâm là kết hợp tự động hóa thông minh với trách nhiệm của con người, để tăng tốc bảo vệ mà không làm mờ quyền kiểm soát.',
+    ],
+    sortOrder: 3,
+  },
+  {
     name: 'Vô hiệu hóa mối đe dọa suốt ngày đêm',
     slug: 'neutralize-threats',
     categorySlug: 'tong-quat',
+    sourcePaths: ['/solutions/neutralize-threats'],
+    dedupedSourcePaths: ['/solutions/mdr-security-solutions'],
     shortDescription:
       'Dịch vụ MDR 24/7 ngăn ngừa, phát hiện và phản ứng — giảm thiểu rủi ro, giảm quá tải cảnh báo và vô hiệu hóa mối đe dọa quanh đồng hồ.',
     painPoints: [
@@ -857,6 +1280,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Bảo mật đám mây hợp nhất',
     slug: 'public-cloud',
     categorySlug: 'tong-quat',
+    sourcePaths: ['/public-cloud'],
     shortDescription:
       'Hệ thống bảo mật đám mây AI-native hợp nhất, bao phủ workload, mạng và danh tính trên AWS, Azure, GCP và OCI với XDR, MDR, SIEM, ITDR và tường lửa thế hệ mới.',
     painPoints: [
@@ -879,6 +1303,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Ngăn ngừa thất thoát dữ liệu',
     slug: 'data-protection',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/data-protection'],
     shortDescription:
       'Bảo vệ dữ liệu toàn diện với dịch vụ bảo mật được quản lý 24/7, bảo vệ điểm cuối nâng cao với XDR, tường lửa thế hệ mới và bảo mật đám mây cho tổ chức mọi quy mô.',
     painPoints: [
@@ -899,6 +1324,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Bảo vệ trước mối đe dọa nội bộ',
     slug: 'insider-threat-protection',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/insider-threat-protection'],
     shortDescription:
       'Giải pháp giảm thiểu tập trung vào phòng ngừa, chủ động nhận diện mối đe dọa và bảo vệ dữ liệu quan trọng khỏi các tấn công xuất phát từ nội bộ.',
     painPoints: [
@@ -919,6 +1345,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Tối ưu vị thế bảo hiểm an ninh mạng',
     slug: 'cyber-insurance',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/cyber-insurance'],
     shortDescription:
       'Giảm thiểu rủi ro tấn công mạng và dễ dàng đạt được mức bảo hiểm an ninh mạng phù hợp với nhu cầu của doanh nghiệp.',
     painPoints: [
@@ -939,6 +1366,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Bảo mật cho lực lượng làm việc từ xa',
     slug: 'remote-working',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/remote-working'],
     shortDescription:
       'Bảo mật cho tổ chức làm việc mọi nơi với bộ giải pháp toàn diện: bất kỳ địa điểm, thiết bị hay tài nguyên nào.',
     painPoints: [
@@ -959,6 +1387,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Bảo mật chuỗi cung ứng',
     slug: 'supply-chain-security',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/supply-chain-security'],
     shortDescription:
       'Phòng vệ trước các cuộc tấn công chuỗi cung ứng, giảm thiểu rủi ro từ lừa đảo, lỗ hổng của nhà cung cấp bên thứ ba và phần mềm bị xâm phạm.',
     painPoints: [
@@ -977,8 +1406,10 @@ export const solutions: CatalogSolution[] = [
   },
   {
     name: 'Bảo vệ email cho Microsoft 365',
-    slug: 'microsoft-365-email',
+    slug: 'microsoft-365',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/microsoft-365'],
+    dedupedSourcePaths: ['/solutions/use-cases/microsoft-365-email'],
     shortDescription:
       'Tích hợp với email Microsoft 365 chỉ trong vài phút, bảo vệ người dùng nhanh hơn và mở khóa khả năng hiển thị đầu–cuối trên toàn bộ M365 với XDR.',
     painPoints: [
@@ -999,6 +1430,7 @@ export const solutions: CatalogSolution[] = [
     name: 'SecureOps và Microsoft — Mạnh mẽ hơn khi kết hợp',
     slug: 'microsoft',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/microsoft'],
     shortDescription:
       'Tăng cường bảo vệ trên môi trường Microsoft, giảm rủi ro, nâng cao ROI bảo mật với các giải pháp an ninh mạng tích hợp.',
     painPoints: [
@@ -1019,6 +1451,8 @@ export const solutions: CatalogSolution[] = [
     name: 'Tăng cường phòng thủ mã độc tống tiền',
     slug: 'ransomware-protection',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/ransomware-protection'],
+    dedupedSourcePaths: ['/solutions/use-cases/ransomware-protection-1'],
     shortDescription:
       'Phát hiện và chặn mã độc tống tiền ở nhiều giai đoạn của chuỗi tấn công với bảo vệ mạng nâng cao và giám sát mối đe dọa 24/7.',
     painPoints: [
@@ -1039,6 +1473,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Ngăn ngừa mối đe dọa',
     slug: 'threat-prevention',
     categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/threat-prevention'],
     shortDescription:
       'Khả năng hiển thị, bảo vệ và hiệu năng vượt trội cho những mạng đòi hỏi khắt khe nhất hiện nay.',
     painPoints: [
@@ -1055,12 +1490,35 @@ export const solutions: CatalogSolution[] = [
     ],
     sortOrder: 12,
   },
+  {
+    name: 'Bảo mật môi trường ảo hóa',
+    slug: 'virtualization',
+    categorySlug: 'theo-nhu-cau',
+    sourcePaths: ['/solutions/use-cases/virtualization'],
+    shortDescription:
+      'Bảo vệ máy ảo, máy chủ và workload dùng chung tài nguyên với lớp phòng thủ tối ưu cho môi trường ảo hóa và trung tâm dữ liệu hiện đại.',
+    painPoints: [
+      'Môi trường ảo hóa thay đổi nhanh, khiến tài sản và cấu hình bảo mật dễ bị lệch chuẩn.',
+      'Một điểm yếu trên host hoặc workload có thể ảnh hưởng đến nhiều hệ thống liên quan.',
+    ],
+    benefits: [
+      'Theo dõi và bảo vệ workload ảo hóa trong cùng một chương trình an ninh tổng thể.',
+      'Giảm rủi ro từ mã độc, khai thác lỗ hổng và cấu hình sai trên máy chủ.',
+      'Duy trì hiệu năng phù hợp cho hạ tầng dùng chung tài nguyên.',
+    ],
+    overview: [
+      'Giải pháp bảo mật môi trường ảo hóa của SecureOps giúp tổ chức bảo vệ workload và máy chủ trong các cụm hạ tầng hiện đại, nơi tài nguyên được cấp phát linh hoạt và thay đổi liên tục.',
+      'Cách tiếp cận kết hợp bảo vệ máy chủ, giám sát mối đe dọa và quản lý rủi ro để giảm khả năng một điểm yếu lan rộng trong môi trường ảo.',
+    ],
+    sortOrder: 13,
+  },
 
   /* --- Theo ngành (industry) --- */
   {
     name: 'An ninh mạng cho khối Chính phủ',
     slug: 'government',
     categorySlug: 'theo-nganh',
+    sourcePaths: ['/solutions/industries/government'],
     shortDescription:
       'Tiếp cận Zero Trust cho mạng và cơ quan nhà nước: không tin tưởng mặc định, xác minh mọi thứ và kiểm soát tuyệt đối quyền truy cập dữ liệu trên mạng.',
     painPoints: [
@@ -1078,9 +1536,32 @@ export const solutions: CatalogSolution[] = [
     sortOrder: 13,
   },
   {
+    name: 'An ninh mạng cho cơ quan liên bang',
+    slug: 'us-federal',
+    categorySlug: 'theo-nganh',
+    sourcePaths: ['/solutions/industries/us-federal'],
+    shortDescription:
+      'Giải pháp bảo mật cho cơ quan liên bang và đơn vị công quyền có yêu cầu cao về bảo vệ dữ liệu, tính liên tục và kiểm soát truy cập.',
+    painPoints: [
+      'Cơ quan liên bang vận hành hệ thống trọng yếu với áp lực lớn về bảo mật, tuân thủ và tính sẵn sàng.',
+      'Môi trường phân tán cần kiểm soát truy cập chặt chẽ nhưng vẫn hỗ trợ cộng tác an toàn.',
+    ],
+    benefits: [
+      'Tăng cường bảo vệ dữ liệu và dịch vụ trọng yếu bằng kiểm soát Zero Trust.',
+      'Kết hợp giám sát 24/7, bảo vệ điểm cuối, mạng và đám mây trong một chương trình thống nhất.',
+      'Hỗ trợ đội ngũ nội bộ ưu tiên rủi ro và phản ứng nhanh với mối đe dọa có chủ đích.',
+    ],
+    overview: [
+      'Giải pháp an ninh mạng cho cơ quan liên bang của SecureOps tập trung vào bảo vệ hệ thống trọng yếu, dữ liệu nhạy cảm và hoạt động phục vụ công chúng trước các mối đe dọa hiện đại.',
+      'Kiến trúc kết hợp phòng thủ nhiều lớp, dịch vụ giám sát và kiểm soát truy cập giúp tổ chức duy trì tính liên tục trong khi vẫn đáp ứng kỳ vọng bảo mật cao.',
+    ],
+    sortOrder: 14,
+  },
+  {
     name: 'An ninh mạng cho Tài chính – Ngân hàng',
     slug: 'finance-and-banking',
     categorySlug: 'theo-nganh',
+    sourcePaths: ['/solutions/industries/finance-and-banking'],
     shortDescription:
       'Bảo vệ toàn diện dữ liệu, giao dịch và hoạt động cho ngân hàng và mạng lưới tài chính.',
     painPoints: [
@@ -1101,6 +1582,7 @@ export const solutions: CatalogSolution[] = [
     name: 'An ninh mạng cho Y tế',
     slug: 'healthcare',
     categorySlug: 'theo-nganh',
+    sourcePaths: ['/solutions/industries/healthcare'],
     shortDescription:
       'Bảo vệ môi trường IT và dữ liệu sức khỏe nhạy cảm, hỗ trợ tuân thủ các quy định nghiêm ngặt với giải pháp an ninh mạng y tế toàn diện.',
     painPoints: [
@@ -1121,6 +1603,7 @@ export const solutions: CatalogSolution[] = [
     name: 'An ninh mạng cho Sản xuất',
     slug: 'manufacturing',
     categorySlug: 'theo-nganh',
+    sourcePaths: ['/solutions/industries/manufacturing'],
     shortDescription:
       'Giải pháp bảo mật toàn diện cho nhà máy và tổ chức sản xuất hiện đại trên toàn cầu.',
     painPoints: [
@@ -1141,6 +1624,7 @@ export const solutions: CatalogSolution[] = [
     name: 'An ninh mạng cho Bán lẻ',
     slug: 'retail',
     categorySlug: 'theo-nganh',
+    sourcePaths: ['/solutions/industries/retail'],
     shortDescription:
       'Hệ sinh thái bảo mật độc đáo mang lại sự bảo vệ vững chắc cho các cơ sở bán lẻ phân tán và bán hàng trực tuyến.',
     painPoints: [
@@ -1161,6 +1645,8 @@ export const solutions: CatalogSolution[] = [
     name: 'An ninh mạng cho Giáo dục',
     slug: 'education',
     categorySlug: 'theo-nganh',
+    sourcePaths: ['/solutions/industries/education'],
+    dedupedSourcePaths: ['/solutions/industries/education1'],
     shortDescription:
       'Giữ an toàn cho học sinh, giảng viên và dữ liệu — tại trường, từ xa hay trên đám mây — với các giải pháp bảo mật thích ứng.',
     painPoints: [
@@ -1203,6 +1689,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Tuân thủ các Kiểm soát An ninh Trọng yếu (CIS Controls)',
     slug: 'cis-critical-security-controls',
     categorySlug: 'tuan-thu',
+    sourcePaths: ['/solutions/compliance/cis-critical-security-controls'],
     shortDescription:
       'Giải pháp bảo mật thế hệ mới mang lại phòng thủ vững chắc và công cụ bảo vệ dữ liệu, giúp đáp ứng các yêu cầu tuân thủ ngày càng tăng theo ngành và khu vực.',
     painPoints: [
@@ -1223,6 +1710,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Hỗ trợ tuân thủ GDPR',
     slug: 'gdpr',
     categorySlug: 'tuan-thu',
+    sourcePaths: ['/solutions/compliance/gdpr'],
     shortDescription:
       'Hỗ trợ nỗ lực tuân thủ Quy định Bảo vệ Dữ liệu Chung của EU (GDPR) và giảm thiểu rủi ro bị phạt bằng cách giữ an toàn cho dữ liệu và thiết bị.',
     painPoints: [
@@ -1243,6 +1731,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Tuân thủ PCI DSS',
     slug: 'pci-dss',
     categorySlug: 'tuan-thu',
+    sourcePaths: ['/solutions/compliance/pci-dss'],
     shortDescription:
       'Bảo vệ dữ liệu chủ thẻ với sự bảo vệ đầu–cuối và triển khai chính sách Zero Trust để đáp ứng các yêu cầu của PCI DSS.',
     painPoints: [
@@ -1263,6 +1752,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Tuân thủ HIPAA',
     slug: 'hipaa',
     categorySlug: 'tuan-thu',
+    sourcePaths: ['/solutions/compliance/hipaa'],
     shortDescription:
       'Bảo vệ thông tin sức khỏe (PHI) với mã hóa luôn bật, quản lý từ mọi nơi và đáp ứng các biện pháp bảo vệ theo HIPAA.',
     painPoints: [
@@ -1283,6 +1773,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Tuân thủ SOX',
     slug: 'sox',
     categorySlug: 'tuan-thu',
+    sourcePaths: ['/solutions/compliance/sox'],
     shortDescription:
       'Bảo mật thế hệ mới với nhiều giải pháp giúp đạt và duy trì tuân thủ SOX, đảm bảo tính sẵn sàng của hồ sơ tài chính.',
     painPoints: [
@@ -1303,6 +1794,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Hỗ trợ tuân thủ CCPA',
     slug: 'ccpa',
     categorySlug: 'tuan-thu',
+    sourcePaths: ['/solutions/compliance/ccpa'],
     shortDescription:
       'Hỗ trợ nỗ lực tuân thủ Đạo luật Quyền riêng tư Người tiêu dùng California (CCPA) với bộ giải pháp bảo mật hoàn chỉnh.',
     painPoints: [
@@ -1323,6 +1815,7 @@ export const solutions: CatalogSolution[] = [
     name: 'Tuân thủ an toàn Internet cho trường học (CIPA)',
     slug: 'cipa',
     categorySlug: 'tuan-thu',
+    sourcePaths: ['/solutions/compliance/cipa'],
     shortDescription:
       'Cung cấp công cụ và giải pháp giúp trường học và thư viện xây dựng Chính sách An toàn Internet tuân thủ CIPA.',
     painPoints: [

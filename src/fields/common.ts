@@ -27,3 +27,16 @@ export function bulletArray(name: string, label: string): Field {
     fields: [{ name: 'item', type: 'text', required: true }],
   }
 }
+
+/** Rich content sections for product/solution detail pages. */
+export const detailSectionsField: Field = {
+  name: 'detailSections',
+  type: 'array',
+  label: 'Nội dung chi tiết',
+  labels: { singular: 'Khối nội dung', plural: 'Khối nội dung' },
+  fields: [
+    { name: 'heading', type: 'text', required: true, label: 'Tiêu đề' },
+    { name: 'body', type: 'richText', required: true, label: 'Nội dung' },
+    bulletArray('bullets', 'Gạch đầu dòng'),
+  ],
+}
